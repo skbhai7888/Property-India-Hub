@@ -1,34 +1,35 @@
-export default function Home() {
-  const projects = [
-    { name: "Fragrance Homes", location: "Siddharth Vihar, Ghaziabad", price: "₹10,999/Sq.Ft onwards", tag: "Ready to Move", type: "Apartment" },
-    { name: "Garh Ganga Enclave", location: "Garhmukteshwar, UP", price: "₹18,000/Sq.Yard", tag: "Ganga View", type: "Plot" },
-    { name: "Sunshine City Plots", location: "Yamuna Expressway, Greater Noida", price: "₹30.5 Lac onwards", tag: "Near Jewar Airport", type: "Plot" },
-    { name: "SCC Blossom", location: "Raj Nagar Extension, Ghaziabad", price: "₹6,990/Sq.Ft onwards", tag: "RERA Approved", type: "Apartment" },
-    { name: "Dev Bhoomi Uttarakhand", location: "Jageshwar Dham, Almora", price: "₹9,000/Sq.Yard", tag: "Hill View", type: "Plot" },
-    { name: "Mapple Green", location: "Behror, Rajasthan", price: "₹25,000/Sq.Yard", tag: "NH-48 Highway", type: "Plot" },
-    { name: "Radha Krishna Vihar", location: "Mathura, UP", price: "₹21,000/Gaj", tag: "Religious Hub", type: "Plot" },
-    { name: "Radha Krishna Puram", location: "Chhata, Mathura", price: "₹19,500/Gaj", tag: "12-Month EMI", type: "Plot" },
-    { name: "Radha Krishna Brij Bhumi", location: "Chhata, Mathura", price: "₹13,500/Gaj onwards", tag: "Near Highway", type: "Plot" },
-    { name: "Radhe Awadh Puri", location: "Ayodhya Dham, UP", price: "₹17,000/Gaj", tag: "Near Ram Mandir", type: "Plot" },
-    { name: "Radhe Shyam Puri", location: "Khatu Shyam Ji, Sikar", price: "₹21,000/Gaj", tag: "Spiritual Hub", type: "Plot" },
-    { name: "Shri Ram Janki Ayodhya Dham", location: "Ayodhya, UP", price: "₹27,000/Gaj", tag: "Near 7-Star Hotel", type: "Plot" },
-    { name: "Radha Krishna Nagar", location: "Greater Noida, UP", price: "₹21,000/Gaj", tag: "Near KMP Expressway", type: "Plot" },
-    { name: "Shree Govind Vatika", location: "Chhata, Mathura", price: "₹12,000/Gaj", tag: "Budget Friendly", type: "Plot" },
-    { name: "Radha Krishna Vrindavan Ashram", location: "Sadar, Mathura", price: "₹28,000/Gaj", tag: "Near Prem Mandir", type: "Plot" },
-    { name: "Shree Radha Krishna Enclave", location: "Mant, Mathura", price: "₹17,500/Gaj", tag: "Near Jewar Airport", type: "Plot" },
-    { name: "Shree Radha Krishna Vatika", location: "Tappal, Aligarh", price: "₹25,500/Gaj", tag: "8 KM Jewar Airport", type: "Plot" },
-    { name: "Prateek Grand Begonia", location: "Siddharth Vihar, Ghaziabad", price: "₹1.29 Cr onwards", tag: "Luxury High-Rise", type: "Apartment" },
-  ];
+import Link from 'next/link';
 
+const projects = [
+  { slug: "fragrance-homes", name: "Fragrance Homes", location: "Siddharth Vihar, Ghaziabad", price: "₹10,999/Sq.Ft onwards", tag: "Ready to Move", type: "Apartment" },
+  { slug: "garh-ganga-enclave", name: "Garh Ganga Enclave", location: "Garhmukteshwar, UP", price: "₹18,000/Sq.Yard", tag: "Ganga View", type: "Plot" },
+  { slug: "sunshine-city-plots", name: "Sunshine City Plots", location: "Yamuna Expressway, Greater Noida", price: "₹30.5 Lac onwards", tag: "Near Jewar Airport", type: "Plot" },
+  { slug: "scc-blossom", name: "SCC Blossom", location: "Raj Nagar Extension, Ghaziabad", price: "₹6,990/Sq.Ft onwards", tag: "RERA Approved", type: "Apartment" },
+  { slug: "dev-bhoomi-uttarakhand", name: "Dev Bhoomi Uttarakhand", location: "Jageshwar Dham, Almora", price: "₹9,000/Sq.Yard", tag: "Hill View", type: "Plot" },
+  { slug: "mapple-green", name: "Mapple Green", location: "Behror, Rajasthan", price: "₹25,000/Sq.Yard", tag: "NH-48 Highway", type: "Plot" },
+  { slug: "radha-krishna-vihar", name: "Radha Krishna Vihar", location: "Mathura, UP", price: "₹21,000/Gaj", tag: "Religious Hub", type: "Plot" },
+  { slug: "radha-krishna-puram", name: "Radha Krishna Puram", location: "Chhata, Mathura", price: "₹19,500/Gaj", tag: "12-Month EMI", type: "Plot" },
+  { slug: "radha-krishna-brij-bhumi", name: "Radha Krishna Brij Bhumi", location: "Chhata, Mathura", price: "₹13,500/Gaj onwards", tag: "Near Highway", type: "Plot" },
+  { slug: "radhe-awadh-puri", name: "Radhe Awadh Puri", location: "Ayodhya Dham, UP", price: "₹17,000/Gaj", tag: "Near Ram Mandir", type: "Plot" },
+  { slug: "radhe-shyam-puri", name: "Radhe Shyam Puri", location: "Khatu Shyam Ji, Sikar", price: "₹21,000/Gaj", tag: "Spiritual Hub", type: "Plot" },
+  { slug: "shri-ram-janki-ayodhya-dham", name: "Shri Ram Janki Ayodhya Dham", location: "Ayodhya, UP", price: "₹27,000/Gaj", tag: "Near 7-Star Hotel", type: "Plot" },
+  { slug: "radha-krishna-nagar", name: "Radha Krishna Nagar", location: "Greater Noida, UP", price: "₹21,000/Gaj", tag: "Near KMP Expressway", type: "Plot" },
+  { slug: "shree-govind-vatika", name: "Shree Govind Vatika", location: "Chhata, Mathura", price: "₹12,000/Gaj", tag: "Budget Friendly", type: "Plot" },
+  { slug: "radha-krishna-vrindavan-ashram", name: "Radha Krishna Vrindavan Ashram", location: "Sadar, Mathura", price: "₹28,000/Gaj", tag: "Near Prem Mandir", type: "Plot" },
+  { slug: "shree-radha-krishna-enclave", name: "Shree Radha Krishna Enclave", location: "Mant, Mathura", price: "₹17,500/Gaj", tag: "Near Jewar Airport", type: "Plot" },
+  { slug: "shree-radha-krishna-vatika", name: "Shree Radha Krishna Vatika", location: "Tappal, Aligarh", price: "₹25,500/Gaj", tag: "8 KM Jewar Airport", type: "Plot" },
+  { slug: "prateek-grand-begonia", name: "Prateek Grand Begonia", location: "Siddharth Vihar, Ghaziabad", price: "₹1.29 Cr onwards", tag: "Luxury High-Rise", type: "Apartment" },
+];
+
+export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50">
-      {/* Header */}
       <header className="sticky top-0 z-50 shadow-lg" style={{background: '#0a1628'}}>
         <div className="max-w-6xl mx-auto flex justify-between items-center p-4">
           <div className="flex items-center gap-3">
             <span className="text-3xl">🏠</span>
             <div>
-              <h1 className="text-lg font-bold" style={{color: '#c9a84c', letterSpacing: '1px'}}>PROPERTY</h1>
+              <h1 className="text-lg font-bold" style={{color: '#c9a84c'}}>PROPERTY</h1>
               <p className="text-xs font-semibold tracking-widest" style={{color: '#e8d5a3'}}>— INDIA HUB —</p>
             </div>
           </div>
@@ -39,18 +40,16 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero */}
       <section className="text-white py-14 px-4 text-center" style={{background: 'linear-gradient(135deg, #0a1628 0%, #1a3a6b 100%)'}}>
         <h2 className="text-3xl font-bold mb-2">भारत की बेहतरीन Properties</h2>
         <p className="mb-1" style={{color: '#c9a84c'}}>Uttarakhand • Rajasthan • Uttar Pradesh</p>
         <p className="font-semibold mb-6 text-sm" style={{color: '#e8d5a3'}}>18 Premium Projects | 12-Month EMI Available</p>
         <div className="flex gap-3 justify-center flex-wrap">
           <a href="https://wa.me/917820008509" className="px-6 py-3 rounded-full font-bold text-black" style={{background: '#c9a84c'}}>Free Site Visit Book Karo</a>
-          <a href="tel:+917820008509" className="border-2 px-6 py-3 rounded-full font-bold text-white" style={{borderColor: '#c9a84c', color: '#c9a84c'}}>📞 Call Now</a>
+          <a href="tel:+917820008509" className="border-2 px-6 py-3 rounded-full font-bold" style={{borderColor: '#c9a84c', color: '#c9a84c'}}>📞 Call Now</a>
         </div>
       </section>
 
-      {/* Stats */}
       <section className="bg-white py-6 px-4 shadow">
         <div className="max-w-6xl mx-auto grid grid-cols-3 gap-4 text-center">
           <div><p className="text-2xl font-bold" style={{color: '#0a1628'}}>18+</p><p className="text-xs text-gray-500">Live Projects</p></div>
@@ -59,35 +58,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects */}
       <section className="py-10 px-4 max-w-6xl mx-auto">
         <h3 className="text-2xl font-bold text-center mb-1" style={{color: '#0a1628'}}>Our Live Projects</h3>
-        <p className="text-center text-gray-500 mb-8 text-sm">Plots • Apartments • Farmhouses</p>
+        <p className="text-center text-gray-500 mb-8 text-sm">Tap on any project for full details</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, i) => (
-            <div key={i} className="bg-white border rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="h-36 flex items-center justify-center" style={{background: 'linear-gradient(135deg, #0a1628 0%, #1a3a6b 100%)'}}>
-                <span className="text-5xl">{project.type === "Apartment" ? "🏢" : "🏡"}</span>
-              </div>
-              <div className="p-4">
-                <div className="flex justify-between items-start mb-2">
-                  <span className="text-xs px-2 py-1 rounded-full font-semibold" style={{background: '#fef3c7', color: '#92400e'}}>{project.tag}</span>
-                  <span className="text-xs px-2 py-1 rounded-full" style={{background: '#e0e7ff', color: '#3730a3'}}>{project.type}</span>
+            <Link href={`/projects/${project.slug}`} key={i}>
+              <div className="bg-white border rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+                <div className="h-36 flex items-center justify-center" style={{background: 'linear-gradient(135deg, #0a1628 0%, #1a3a6b 100%)'}}>
+                  <span className="text-5xl">{project.type === "Apartment" ? "🏢" : "🏡"}</span>
                 </div>
-                <h4 className="font-bold text-sm mt-2" style={{color: '#0a1628'}}>{project.name}</h4>
-                <p className="text-gray-500 text-xs mt-1">📍 {project.location}</p>
-                <p className="font-bold mt-2 text-sm" style={{color: '#c9a84c'}}>{project.price}</p>
-                <div className="flex gap-2 mt-3">
-                  <a href="https://wa.me/917820008509" className="flex-1 text-white text-center py-2 rounded-lg text-xs font-bold" style={{background: '#0a1628'}}>Enquire Now</a>
-                  <a href="tel:+917820008509" className="text-white px-3 py-2 rounded-lg text-xs font-bold" style={{background: '#22c55e'}}>📞</a>
+                <div className="p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <span className="text-xs px-2 py-1 rounded-full font-semibold" style={{background: '#fef3c7', color: '#92400e'}}>{project.tag}</span>
+                    <span className="text-xs px-2 py-1 rounded-full" style={{background: '#e0e7ff', color: '#3730a3'}}>{project.type}</span>
+                  </div>
+                  <h4 className="font-bold text-sm mt-2" style={{color: '#0a1628'}}>{project.name}</h4>
+                  <p className="text-gray-500 text-xs mt-1">📍 {project.location}</p>
+                  <p className="font-bold mt-2 text-sm" style={{color: '#c9a84c'}}>{project.price}</p>
+                  <div className="flex items-center justify-between mt-3">
+                    <span className="text-xs font-bold" style={{color: '#0a1628'}}>Tap for Details →</span>
+                    <a href={`https://wa.me/917820008509?text=I am interested in ${project.name}`} onClick={e => e.stopPropagation()} className="text-white px-3 py-1 rounded-lg text-xs font-bold" style={{background: '#22c55e'}}>💬</a>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
 
-      {/* Contact */}
       <section className="text-white py-10 px-4 text-center" style={{background: '#0a1628'}}>
         <h3 className="text-xl font-bold mb-1">Aaj Hi Contact Karein</h3>
         <p className="text-sm mb-6" style={{color: '#c9a84c'}}>Free Consultation • Site Visit • Best Price Guaranteed</p>
@@ -98,16 +97,14 @@ export default function Home() {
         <p className="text-xs mt-4" style={{color: '#e8d5a3'}}>📧 propertyindiahubs@gmail.com</p>
       </section>
 
-      {/* Footer */}
       <footer className="text-center py-4 text-xs" style={{background: '#060e1a', color: '#c9a84c'}}>
         <p>© 2026 <span className="font-bold">PROPERTY INDIA HUB</span> | All Rights Reserved</p>
       </footer>
 
-      {/* Floating Buttons */}
       <div className="fixed bottom-6 right-4 flex flex-col gap-3 z-50">
         <a href="tel:+917820008509" className="text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-xl" style={{background: '#0a1628'}}>📞</a>
         <a href="https://wa.me/917820008509" className="bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-xl">💬</a>
       </div>
     </main>
   );
-} 
+}

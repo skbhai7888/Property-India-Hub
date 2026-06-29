@@ -60,11 +60,11 @@ export default function Home() {
 
       <section className="py-10 px-4 max-w-6xl mx-auto">
         <h3 className="text-2xl font-bold text-center mb-1" style={{color: '#0a1628'}}>Our Live Projects</h3>
-        <p className="text-center text-gray-500 mb-8 text-sm">Tap on any project for full details</p>
+        <p className="text-center text-gray-500 mb-8 text-sm">👆 Tap any project for full details</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, i) => (
-            <Link href={`/projects/${project.slug}`} key={i}>
-              <div className="bg-white border rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
+            <div key={i} className="bg-white border rounded-xl shadow-md overflow-hidden">
+              <Link href={`/projects/${project.slug}`} className="block">
                 <div className="h-36 flex items-center justify-center" style={{background: 'linear-gradient(135deg, #0a1628 0%, #1a3a6b 100%)'}}>
                   <span className="text-5xl">{project.type === "Apartment" ? "🏢" : "🏡"}</span>
                 </div>
@@ -76,13 +76,14 @@ export default function Home() {
                   <h4 className="font-bold text-sm mt-2" style={{color: '#0a1628'}}>{project.name}</h4>
                   <p className="text-gray-500 text-xs mt-1">📍 {project.location}</p>
                   <p className="font-bold mt-2 text-sm" style={{color: '#c9a84c'}}>{project.price}</p>
-                  <div className="flex items-center justify-between mt-3">
-                    <span className="text-xs font-bold" style={{color: '#0a1628'}}>Tap for Details →</span>
-                    <a href={`https://wa.me/917820008509?text=I am interested in ${project.name}`} onClick={e => e.stopPropagation()} className="text-white px-3 py-1 rounded-lg text-xs font-bold" style={{background: '#22c55e'}}>💬</a>
-                  </div>
+                  <p className="text-xs mt-2 font-semibold" style={{color: '#0a1628'}}>Tap for Full Details →</p>
                 </div>
+              </Link>
+              <div className="px-4 pb-4 flex gap-2">
+                <a href={`https://wa.me/917820008509?text=I am interested in ${project.name}`} className="flex-1 text-white text-center py-2 rounded-lg text-xs font-bold" style={{background: '#16a34a'}}>💬 WhatsApp</a>
+                <a href="tel:+917820008509" className="text-white px-3 py-2 rounded-lg text-xs font-bold" style={{background: '#0a1628'}}>📞</a>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </section>
@@ -107,4 +108,4 @@ export default function Home() {
       </div>
     </main>
   );
-}
+} 

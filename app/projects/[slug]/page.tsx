@@ -3,9 +3,12 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { useState } from 'react';
 
+const LOGO = "https://res.cloudinary.com/deeolaopc/image/upload/v1782739062/Property_India_Hub_jbrp94.jpg";
+
 const projects: Record<string, any> = {
   'fragrance-homes': {
     name: "Fragrance Homes", location: "Siddharth Vihar, Ghaziabad", price: "₹10,999/Sq.Ft onwards", tag: "Ready to Move", type: "Apartment", builder: "Truvae Group", rera: "UPRERAPRJ4727",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782727652/ChatGPT_Image_Jun_29_2026_05_33_05_AM_b0czaq.png",
     sizes: ["2 BHK - 1105 Sq.Ft", "2 BHK - 1135 Sq.Ft", "3 BHK - 1350 Sq.Ft", "3 BHK - 1525 Sq.Ft"],
     amenities: ["Rooftop Swimming Pool", "Luxury Clubhouse", "Gym", "Amphitheater", "Jogging Track", "Yoga Lawn"],
     highlights: ["2 min from Metro & RRTS", "Near NH-58 & NH-24", "Near DPS Indirapuram"],
@@ -13,6 +16,7 @@ const projects: Record<string, any> = {
   },
   'garh-ganga-enclave': {
     name: "Garh Ganga Enclave", location: "Garhmukteshwar, UP", price: "₹18,000/Sq.Yard", tag: "Ganga View", type: "Plot", builder: "Ind Group",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782737374/ChatGPT_Image_Jun_29_2026_07_04_46_AM_eao6yf.png",
     sizes: ["50 Sq.Yard", "100 Sq.Yard", "150 Sq.Yard", "200 Sq.Yard", "250 Sq.Yard"],
     amenities: ["Gated Society", "Swimming Pool", "Clubhouse", "CCTV", "Street Lights", "Parks"],
     highlights: ["200m from NH-09", "Ready for Construction", "Immediate Registry"],
@@ -20,6 +24,7 @@ const projects: Record<string, any> = {
   },
   'sunshine-city-plots': {
     name: "Sunshine City Plots", location: "Yamuna Expressway, Greater Noida", price: "₹30.5 Lac onwards", tag: "Near Jewar Airport", type: "Plot", builder: "Aaradhya Realty",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782736551/ChatGPT_Image_Jun_23_2026_04_01_17_PM_yzom54.png",
     sizes: ["100 Sq.Yard (20x45)", "120 Sq.Yard", "200 Sq.Yard"],
     amenities: ["Grand Entrance", "Concrete Roads", "Street Lights", "Green Parks", "24x7 Security", "CCTV"],
     highlights: ["15 min from Jewar Airport", "10 min from Film City", "70% Bank Loan Available"],
@@ -27,6 +32,7 @@ const projects: Record<string, any> = {
   },
   'scc-blossom': {
     name: "SCC Blossom", location: "Raj Nagar Extension, Ghaziabad", price: "₹6,990/Sq.Ft onwards", tag: "RERA Approved", type: "Apartment", builder: "SCC Builders Pvt. Ltd.", rera: "UPRERAPRJ735034",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782736544/ChatGPT_Image_Jun_23_2026_07_30_47_AM_xhsuo0.png",
     sizes: ["2 BHK - 915 Sq.Ft", "2 BHK+Dress - 1030 Sq.Ft", "2 BHK+Kids Room - 1190 Sq.Ft"],
     amenities: ["Swimming Pool", "Badminton Court", "Cricket Pitch", "Clubhouse", "Power Backup", "Parking"],
     highlights: ["8 KM from Hindon Metro", "Near DPS & GD Goenka", "Main NH-58"],
@@ -34,6 +40,7 @@ const projects: Record<string, any> = {
   },
   'dev-bhoomi-uttarakhand': {
     name: "Dev Bhoomi Uttarakhand", location: "Jageshwar Dham, Almora", price: "₹9,000/Sq.Yard", tag: "Hill View", type: "Plot", builder: "Property India Hub (JV)",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782736569/ChatGPT_Image_Jun_24_2026_04_43_11_PM_sqr01n.png",
     sizes: ["200 Sq.Yard - ₹18 Lakh", "240 Sq.Yard - ₹21.6 Lakh", "300 Sq.Yard - ₹27 Lakh"],
     amenities: ["10-Acre Forest", "Himalayan Views", "Natural Mineral Water", "Water Body", "25Ft Roads", "Trekking Paths"],
     highlights: ["Near Jageshwar Dham Temple", "Homestay/Airbnb Potential", "Pre-Launch Price"],
@@ -41,6 +48,7 @@ const projects: Record<string, any> = {
   },
   'mapple-green': {
     name: "Mapple Green", location: "Behror, Rajasthan", price: "₹25,000/Sq.Yard", tag: "NH-48 Highway", type: "Plot", builder: "Epic Infrateck",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782736571/ChatGPT_Image_Jun_24_2026_01_14_11_AM_kvcyej.png",
     sizes: ["Residential - ₹25,000/Sq.Yard", "Commercial G+2 - ₹60,000/Sq.Yard", "Shop G+1 - Booking ₹51,000"],
     amenities: ["Grand Gated Entry", "Clubhouse", "Swimming Pool", "Gym", "8 Green Parks", "Underground Wiring"],
     highlights: ["1 min from RRTS Sotanala", "10 min from Neemrana", "500m from RPS School"],
@@ -48,6 +56,7 @@ const projects: Record<string, any> = {
   },
   'radha-krishna-vihar': {
     name: "Radha Krishna Vihar", location: "Mathura, UP", price: "₹21,000/Gaj", tag: "Religious Hub", type: "Plot", builder: "Shubh Labh Developers",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782736571/ChatGPT_Image_Jun_25_2026_01_49_07_PM_kyluc6.png",
     sizes: ["100 Sq.Yard (900 Sq.Ft)"],
     amenities: ["Gated Boundary Wall", "40Ft/30Ft Roads", "Electricity", "Water Supply", "Street Lights", "Parks"],
     highlights: ["1 KM from Sanskriti University", "3 KM from KD Medical College", "17 KM from Prem Mandir"],
@@ -55,6 +64,7 @@ const projects: Record<string, any> = {
   },
   'radha-krishna-puram': {
     name: "Radha Krishna Puram", location: "Chhata, Mathura", price: "₹19,500/Gaj", tag: "12-Month EMI", type: "Plot", builder: "Shubh Labh Developers",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782736578/ChatGPT_Image_Jun_24_2026_09_38_23_AM_qvfjn0.png",
     sizes: ["100 Sq.Yard (900 Sq.Ft)"],
     amenities: ["Wide Roads", "Underground Drainage", "Street Lights", "Water & Electricity", "24x7 Security", "Park"],
     highlights: ["In front of Shree Ji Baba Law College", "1.5 KM from GL Bajaj University", "17 KM from Prem Mandir"],
@@ -62,6 +72,7 @@ const projects: Record<string, any> = {
   },
   'radha-krishna-brij-bhumi': {
     name: "Radha Krishna Brij Bhumi", location: "Chhata, Mathura", price: "₹13,500/Gaj onwards", tag: "Near Highway", type: "Plot", builder: "Shubh Labh Developers",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782739089/ChatGPT_Image_Jun_25_2026_07_38_25_AM_xginoq.png",
     sizes: ["100 Sq.Yard - Phase II ₹15,500/Gaj", "100 Sq.Yard - Phase III ₹13,500/Gaj"],
     amenities: ["40Ft/30Ft Roads", "Park", "Street Lights", "Drainage", "24x7 Security", "Demarcation"],
     highlights: ["400m from Delhi-Agra Highway", "2 KM from DPS", "2 KM from GL Bajaj University"],
@@ -69,6 +80,7 @@ const projects: Record<string, any> = {
   },
   'radhe-awadh-puri': {
     name: "Radhe Awadh Puri", location: "Ayodhya Dham, UP", price: "₹17,000/Gaj", tag: "Near Ram Mandir", type: "Plot", builder: "Shubh Labh Developers",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782745110/ChatGPT_Image_Jun_26_2026_06_36_49_PM_tq8pmj.png",
     sizes: ["100 Sq.Yard (900 Sq.Ft)"],
     amenities: ["Gated Township", "40Ft Roads", "Electricity", "Water", "Parks", "CCTV"],
     highlights: ["10 KM from Ram Mandir", "13 KM from Valmiki Airport", "20 KM from Naka Chauraha"],
@@ -76,6 +88,7 @@ const projects: Record<string, any> = {
   },
   'radhe-shyam-puri': {
     name: "Radhe Shyam Puri", location: "Khatu Shyam Ji, Sikar", price: "₹21,000/Gaj", tag: "Spiritual Hub", type: "Plot", builder: "Shubh Labh Developers",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782739086/ChatGPT_Image_Jun_25_2026_09_26_03_PM_ebntxb.png",
     sizes: ["100 Sq.Yard (900 Sq.Ft)"],
     amenities: ["Gated Society", "40Ft/30Ft Roads", "Street Lights", "Drainage", "Water Pipelines", "24x7 Security"],
     highlights: ["7 KM from Khatu Shyam Mandir", "300m from Karni Mata Mandir", "7 KM from Toran Dwar"],
@@ -83,6 +96,7 @@ const projects: Record<string, any> = {
   },
   'shri-ram-janki-ayodhya-dham': {
     name: "Shri Ram Janki Ayodhya Dham", location: "Ayodhya, UP", price: "₹27,000/Gaj", tag: "Near 7-Star Hotel", type: "Plot", builder: "Shubh Labh Developers",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782738727/ChatGPT_Image_Jun_26_2026_12_35_26_PM_bmeszt.png",
     sizes: ["100 Sq.Yard (900 Sq.Ft)"],
     amenities: ["High Boundary Wall", "Security Lobby", "Wide Roads", "Park", "Sewage Line", "Street Lights"],
     highlights: ["400m from Leela Ambience 7-Star Hotel", "8 KM from Ram Mandir", "15 KM from Valmiki Airport"],
@@ -90,6 +104,7 @@ const projects: Record<string, any> = {
   },
   'radha-krishna-nagar': {
     name: "Radha Krishna Nagar", location: "Greater Noida, UP", price: "₹21,000/Gaj", tag: "Near KMP Expressway", type: "Plot", builder: "Shubh Labh Developers",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782738117/ChatGPT_Image_Jun_27_2026_09_40_59_PM_jcrmvy.png",
     sizes: ["100 Sq.Yard (900 Sq.Ft)"],
     amenities: ["Gated Township", "24x7 Security", "Parks", "Concrete Roads", "Electricity", "Water & Sewer"],
     highlights: ["700m from KMP Expressway", "2 KM from Dadri Railway Station", "Near Hero Factory"],
@@ -97,6 +112,7 @@ const projects: Record<string, any> = {
   },
   'shree-govind-vatika': {
     name: "Shree Govind Vatika", location: "Chhata, Mathura", price: "₹12,000/Gaj", tag: "Budget Friendly", type: "Plot", builder: "Shubh Labh Developers",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782738685/ChatGPT_Image_Jun_27_2026_06_14_27_PM_dxtv0l.png",
     sizes: ["100 Sq.Yard (900 Sq.Ft)"],
     amenities: ["Demarcated Plots", "Broad Roads", "Water", "Street Lights", "Park", "Gated Fencing"],
     highlights: ["18 KM from Govardhan Parbat", "2 KM from Chhata Railway Station", "18 KM from Barsana"],
@@ -104,6 +120,7 @@ const projects: Record<string, any> = {
   },
   'radha-krishna-vrindavan-ashram': {
     name: "Radha Krishna Vrindavan Ashram", location: "Sadar, Mathura", price: "₹28,000/Gaj", tag: "Near Prem Mandir", type: "Plot", builder: "Shubh Labh Developers",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782738519/ChatGPT_Image_Jun_27_2026_06_29_44_AM_hxabse.png",
     sizes: ["100 Sq.Yard (900 Sq.Ft)"],
     amenities: ["Luxury Gated Boundary", "Security Lobby", "Wide Roads", "Sewerage", "Parks", "24x7 Guard"],
     highlights: ["6 KM from Prem Mandir", "8 KM from Banke Bihari Mandir", "7 KM from ISKCON"],
@@ -111,6 +128,7 @@ const projects: Record<string, any> = {
   },
   'shree-radha-krishna-enclave': {
     name: "Shree Radha Krishna Enclave", location: "Mant, Mathura", price: "₹17,500/Gaj", tag: "Near Jewar Airport", type: "Plot", builder: "Shubh Labh Developers",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782737577/ChatGPT_Image_Jun_28_2026_04_26_24_PM_l9vhls.png",
     sizes: ["100 Sq.Yard (900 Sq.Ft)"],
     amenities: ["Beautiful Park", "Street Lights", "Gated Township", "Wide Road", "Demarcation", "Full Security"],
     highlights: ["20 KM from Jewar Airport", "8 KM from Tappal Cut", "6 KM from Bajna Industrial Area"],
@@ -118,6 +136,7 @@ const projects: Record<string, any> = {
   },
   'shree-radha-krishna-vatika': {
     name: "Shree Radha Krishna Vatika", location: "Tappal, Aligarh", price: "₹25,500/Gaj", tag: "8 KM Jewar Airport", type: "Plot", builder: "Shubh Labh Developers",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782738291/ChatGPT_Image_Jun_27_2026_09_06_43_PM_xziw9a.png",
     sizes: ["100 Sq.Yard (900 Sq.Ft)"],
     amenities: ["Modern Sewage", "40/30/25Ft Roads", "Street Lights", "Park", "Sweet Water", "24x7 Security"],
     highlights: ["8 KM from Jewar Airport", "1.5 KM from Tappal Cut", "2 KM from Tappal Market"],
@@ -125,6 +144,7 @@ const projects: Record<string, any> = {
   },
   'prateek-grand-begonia': {
     name: "Prateek Grand Begonia", location: "Siddharth Vihar, Ghaziabad", price: "₹1.29 Cr onwards", tag: "Luxury High-Rise", type: "Apartment", builder: "Prateek Group", rera: "UPRERAPRJ790651",
+    image: "https://res.cloudinary.com/deeolaopc/image/upload/v1782737453/ChatGPT_Image_Jun_28_2026_10_06_21_PM_luntnv.png",
     sizes: ["2 BHK - 1075 Sq.Ft @ ₹1.29 Cr", "2 BHK+Study - 1280 Sq.Ft @ ₹1.54 Cr", "3 BHK - 1500 Sq.Ft @ ₹1.80 Cr", "3 BHK Premium - 1810 Sq.Ft @ ₹2.17 Cr"],
     amenities: ["Rooftop Garden", "Golf Cart", "Swimming Pool", "EV Charging", "Box Cricket", "Tennis Court"],
     highlights: ["32 Floor High-Rise", "2 min from Metro & RRTS", "Near Noida Sector 62"],
@@ -137,6 +157,7 @@ export default function ProjectPage() {
   const slug = params.slug as string;
   const project = projects[slug];
   const [form, setForm] = useState({ firstName: '', lastName: '', mobile: '', email: '', visitDate: 'This Week', submitted: false });
+  const [showFullImage, setShowFullImage] = useState(false);
 
   const handleShare = async () => {
     const text = `${project.name}\n📍 ${project.location}\n💰 ${project.price}\n📞 +91 7820008509\n🔗 ${window.location.href}`;
@@ -165,22 +186,41 @@ export default function ProjectPage() {
 
   return (
     <main className="min-h-screen bg-gray-50">
+      {/* Header with Logo */}
       <header className="sticky top-0 z-50 shadow-lg" style={{background: '#0a1628'}}>
         <div className="max-w-4xl mx-auto flex justify-between items-center p-4">
-          <Link href="/" className="font-bold" style={{color: '#c9a84c'}}>← Back</Link>
-          <h1 className="text-sm font-bold text-white">Property India Hub</h1>
+          <Link href="/" className="flex items-center gap-2">
+            <img src={LOGO} alt="Logo" className="h-9 w-9 rounded-full object-cover" />
+            <div>
+              <p className="text-sm font-bold leading-tight" style={{color: '#c9a84c'}}>PROPERTY</p>
+              <p className="text-xs leading-tight" style={{color: '#e8d5a3'}}>— INDIA HUB —</p>
+            </div>
+          </Link>
           <button onClick={handleShare} className="px-3 py-1 rounded-full text-xs font-bold text-black" style={{background: '#c9a84c'}}>Share 📤</button>
         </div>
       </header>
 
-      <div className="h-48 flex items-center justify-center" style={{background: 'linear-gradient(135deg, #0a1628 0%, #1a3a6b 100%)'}}>
-        <div className="text-center">
-          <span className="text-6xl">{project.type === 'Apartment' ? '🏢' : '🏡'}</span>
-          <p className="text-white font-bold mt-2">{project.tag}</p>
+      {/* Full Screen Image Viewer */}
+      {showFullImage && (
+        <div className="fixed inset-0 z-50 bg-black flex items-center justify-center" onClick={() => setShowFullImage(false)}>
+          <img src={project.image} alt={project.name} className="w-full h-full object-contain" />
+          <button className="absolute top-4 right-4 text-white text-3xl font-bold">✕</button>
+        </div>
+      )}
+
+      {/* Project Image - Clickable */}
+      <div className="h-56 overflow-hidden cursor-pointer relative" onClick={() => setShowFullImage(true)}>
+        <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
+        <div className="absolute inset-0 flex items-end justify-end p-3" style={{background: 'linear-gradient(transparent, rgba(0,0,0,0.5))'}}>
+          <span className="text-white text-xs bg-black bg-opacity-50 px-2 py-1 rounded-full">🔍 Tap to zoom</span>
+        </div>
+        <div className="absolute top-3 left-3">
+          <span className="text-xs px-2 py-1 rounded-full font-bold" style={{background: '#c9a84c', color: '#0a1628'}}>{project.tag}</span>
         </div>
       </div>
 
       <div className="max-w-4xl mx-auto p-4">
+        {/* Project Info */}
         <div className="bg-white rounded-xl shadow p-4 mb-4">
           <h2 className="text-xl font-bold" style={{color: '#0a1628'}}>{project.name}</h2>
           <p className="text-gray-500 text-sm mt-1">📍 {project.location}</p>
@@ -189,6 +229,7 @@ export default function ProjectPage() {
           {project.rera && <p className="text-xs text-green-600 mt-1">✅ RERA: {project.rera}</p>}
         </div>
 
+        {/* Sizes */}
         <div className="bg-white rounded-xl shadow p-4 mb-4">
           <h3 className="font-bold mb-3" style={{color: '#0a1628'}}>📐 Available Sizes</h3>
           {project.sizes.map((size: string, i: number) => (
@@ -199,6 +240,7 @@ export default function ProjectPage() {
           ))}
         </div>
 
+        {/* Amenities */}
         <div className="bg-white rounded-xl shadow p-4 mb-4">
           <h3 className="font-bold mb-3" style={{color: '#0a1628'}}>✨ Amenities</h3>
           <div className="grid grid-cols-2 gap-2">
@@ -208,6 +250,7 @@ export default function ProjectPage() {
           </div>
         </div>
 
+        {/* Highlights */}
         <div className="bg-white rounded-xl shadow p-4 mb-4">
           <h3 className="font-bold mb-3" style={{color: '#0a1628'}}>📍 Location Highlights</h3>
           {project.highlights.map((h: string, i: number) => (
@@ -218,11 +261,13 @@ export default function ProjectPage() {
           ))}
         </div>
 
+        {/* Payment Plan */}
         <div className="rounded-xl p-4 mb-4" style={{background: '#0a1628'}}>
           <h3 className="font-bold mb-2" style={{color: '#c9a84c'}}>💰 Payment Plan</h3>
           <p className="text-white text-sm">{project.payment}</p>
         </div>
 
+        {/* CTA Buttons */}
         <div className="grid grid-cols-3 gap-3 mb-6">
           <a href={`https://wa.me/917820008509?text=I am interested in ${project.name}`} className="text-white text-center py-3 rounded-xl font-bold text-sm" style={{background: '#16a34a'}}>💬 WhatsApp</a>
           <a href="tel:+917820008509" className="text-white text-center py-3 rounded-xl font-bold text-sm" style={{background: '#0a1628'}}>📞 Call</a>
@@ -233,7 +278,6 @@ export default function ProjectPage() {
         <div className="bg-white rounded-xl shadow p-4 mb-6">
           <h3 className="font-bold text-lg mb-1" style={{color: '#0a1628'}}>🏠 Book Free Site Visit</h3>
           <p className="text-xs text-gray-500 mb-4">Project: <span className="font-bold" style={{color: '#c9a84c'}}>{project.name}</span></p>
-
           {form.submitted ? (
             <div className="text-center py-6">
               <p className="text-2xl mb-2">🎉</p>
@@ -243,65 +287,27 @@ export default function ProjectPage() {
           ) : (
             <div className="flex flex-col gap-3">
               <div className="flex gap-2">
-                <input
-                  placeholder="First Name *"
-                  value={form.firstName}
-                  onChange={e => setForm({...form, firstName: e.target.value})}
-                  className="flex-1 border rounded-lg p-3 text-sm"
-                  style={{borderColor: '#0a1628'}}
-                />
-                <input
-                  placeholder="Last Name"
-                  value={form.lastName}
-                  onChange={e => setForm({...form, lastName: e.target.value})}
-                  className="flex-1 border rounded-lg p-3 text-sm"
-                  style={{borderColor: '#0a1628'}}
-                />
+                <input placeholder="First Name *" value={form.firstName} onChange={e => setForm({...form, firstName: e.target.value})} className="flex-1 border rounded-lg p-3 text-sm" style={{borderColor: '#0a1628'}} />
+                <input placeholder="Last Name" value={form.lastName} onChange={e => setForm({...form, lastName: e.target.value})} className="flex-1 border rounded-lg p-3 text-sm" style={{borderColor: '#0a1628'}} />
               </div>
-              <input
-                placeholder="Mobile Number *"
-                type="tel"
-                value={form.mobile}
-                onChange={e => setForm({...form, mobile: e.target.value})}
-                className="border rounded-lg p-3 text-sm w-full"
-                style={{borderColor: '#0a1628'}}
-              />
-              <input
-                placeholder="Email ID (Optional)"
-                type="email"
-                value={form.email}
-                onChange={e => setForm({...form, email: e.target.value})}
-                className="border rounded-lg p-3 text-sm w-full"
-                style={{borderColor: '#0a1628'}}
-              />
+              <input placeholder="Mobile Number *" type="tel" value={form.mobile} onChange={e => setForm({...form, mobile: e.target.value})} className="border rounded-lg p-3 text-sm w-full" style={{borderColor: '#0a1628'}} />
+              <input placeholder="Email ID (Optional)" type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} className="border rounded-lg p-3 text-sm w-full" style={{borderColor: '#0a1628'}} />
               <div>
                 <p className="text-sm font-semibold mb-2" style={{color: '#0a1628'}}>📅 When do you want to visit?</p>
                 <div className="grid grid-cols-3 gap-2">
                   {['Today', 'This Week', 'Next Week'].map(opt => (
-                    <button
-                      key={opt}
-                      onClick={() => setForm({...form, visitDate: opt})}
-                      className="py-2 rounded-lg text-xs font-bold border-2 transition-all"
-                      style={{
-                        background: form.visitDate === opt ? '#0a1628' : 'white',
-                        color: form.visitDate === opt ? '#c9a84c' : '#0a1628',
-                        borderColor: '#0a1628'
-                      }}
-                    >{opt}</button>
+                    <button key={opt} onClick={() => setForm({...form, visitDate: opt})} className="py-2 rounded-lg text-xs font-bold border-2 transition-all" style={{ background: form.visitDate === opt ? '#0a1628' : 'white', color: form.visitDate === opt ? '#c9a84c' : '#0a1628', borderColor: '#0a1628' }}>{opt}</button>
                   ))}
                 </div>
               </div>
-              <button
-                onClick={handleSubmit}
-                className="w-full py-3 rounded-xl font-bold text-white mt-2"
-                style={{background: '#0a1628'}}
-              >Submit Inquiry 🚀</button>
+              <button onClick={handleSubmit} className="w-full py-3 rounded-xl font-bold text-white mt-2" style={{background: '#0a1628'}}>Submit Inquiry 🚀</button>
             </div>
           )}
         </div>
       </div>
 
-      <div className="fixed bottom-6 right-4 flex flex-col gap-3 z-50">
+      {/* Floating Buttons */}
+      <div className="fixed bottom-6 right-4 flex flex-col gap-3 z-40">
         <a href="tel:+917820008509" className="text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-xl" style={{background: '#0a1628'}}>📞</a>
         <a href="https://wa.me/917820008509" className="bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-xl">💬</a>
       </div>

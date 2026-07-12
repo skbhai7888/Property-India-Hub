@@ -271,6 +271,10 @@ export default function AdminDashboard() {
             <p><b>Experience:</b> {reviewPartner.partner_experience}</p>
             <p><b>Reason to join:</b> {reviewPartner.partner_reason}</p>
             <p><b>Terms Accepted:</b> {reviewPartner.terms_accepted ? "Yes" : "No"}</p>
+                <p className="pt-2 border-t"><b>UPI ID:</b> {reviewPartner.upi_id || "Not added"}</p>
+                <p><b>Account Holder:</b> {reviewPartner.bank_account_holder || "Not added"}</p>
+                <p><b>Account Number:</b> {reviewPartner.bank_account_number || "Not added"}</p>
+                <p><b>IFSC:</b> {reviewPartner.bank_ifsc || "Not added"}</p>
             <p><b>Status:</b> {reviewPartner.partner_status}</p>
             {reviewPartner.referral_code && <p><b>Referral Code:</b> {reviewPartner.referral_code}</p>}
             {reviewPartner.partner_status === "rejected" && reviewPartner.partner_reject_reason && (

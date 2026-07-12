@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import ProjectsSection from '../components/ProjectsSection';
 import { supabase } from '../lib/supabase';
+import HamburgerMenu from '../components/HamburgerMenu';
 
 const LOGO = "https://res.cloudinary.com/deeolaopc/image/upload/v1782739062/Property_India_Hub_jbrp94.jpg";
 
@@ -46,7 +48,7 @@ export default async function Home() {
     <main className="min-h-screen bg-gray-50">
       <header className="sticky top-0 z-50 shadow-lg" style={{background: '#0a1628'}}>
         <div className="max-w-6xl mx-auto flex justify-between items-center p-4">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3"><HamburgerMenu />
             <img src={LOGO} alt="Logo" className="h-10 w-10 rounded-full object-cover" />
             <div>
               <h1 className="text-lg font-bold" style={{color: '#c9a84c'}}>PROPERTY</h1>
@@ -98,43 +100,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="py-10 px-4 max-w-6xl mx-auto">
-        <h3 className="text-2xl font-bold text-center mb-1" style={{color: '#0a1628'}}>Our Live Projects</h3>
-        <p className="text-center text-gray-500 mb-8 text-sm">👆 Tap any project for full details</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, i) => (
-            <div key={i} className="bg-white border rounded-xl shadow-md overflow-hidden">
-              <Link href={`/projects/${project.slug}`} className="block">
-                <div className="h-40 overflow-hidden relative">
-                  <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
-                  <div className="absolute top-2 left-2">
-                    <span className="text-xs px-2 py-1 rounded-full font-bold" style={{background: '#c9a84c', color: '#0a1628'}}>{project.tag}</span>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <span className="text-xs px-2 py-1 rounded-full" style={{background: '#e0e7ff', color: '#3730a3'}}>{project.type}</span>
-                  <h4 className="font-bold text-sm mt-2" style={{color: '#0a1628'}}>{project.name}</h4>
-                  <p className="text-gray-500 text-xs mt-1">📍 {project.location}</p>
-                  <p className="text-xs text-gray-600 mt-2 leading-relaxed">{project.description}</p>
-                  <p className="font-bold mt-2 text-sm" style={{color: '#c9a84c'}}>{project.price}</p>
-                  <p className="text-xs mt-1 font-semibold" style={{color: '#0a1628'}}>Tap for Full Details →</p>
-                </div>
-              </Link>
-              <div className="px-4 pb-4 flex gap-2">
-                <a href={`https://wa.me/917820008509?text=I am interested in ${project.name}`} className="flex-1 flex items-center justify-center gap-1 text-white text-center py-2 rounded-lg text-xs font-bold" style={{background: '#25D366'}}>
-                  <WhatsAppIcon /> WhatsApp
-                </a>
-                <a href={project.map_link} target="_blank" className="flex items-center justify-center text-white px-3 py-2 rounded-lg text-xs font-bold" style={{background: '#4285F4'}}>
-                  <GoogleMapsIcon />
-                </a>
-                <a href="tel:+917820008509" className="flex items-center justify-center text-white px-3 py-2 rounded-lg text-xs font-bold" style={{background: '#22c55e'}}>
-                  <PhoneIcon />
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+        <ProjectsSection projects={projects} />
 
       <section className="text-white py-10 px-4 text-center" style={{background: '#0a1628'}}>
         <h3 className="text-xl font-bold mb-1">Aaj Hi Contact Karein</h3>

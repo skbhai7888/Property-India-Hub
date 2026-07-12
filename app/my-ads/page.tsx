@@ -8,6 +8,7 @@ export default function MyAdsPage() {
   const [user, setUser] = useState<any>(null);
   const [checking, setChecking] = useState(true);
   const [listings, setListings] = useState<any[]>([]);
+  const [projectStatuses, setProjectStatuses] = useState<Record<string, string>>({});
   const [showForm, setShowForm] = useState(false);
   const [editingAd, setEditingAd] = useState<any>(null);
   const router = useRouter();
@@ -26,6 +27,21 @@ export default function MyAdsPage() {
   const loadListings = async (userId: string) => {
     const { data } = await supabase.from("user_listings").select("*").eq("user_id", userId).order("created_at", { ascending: false });
     setListings(data || []);
+    const approvedSlugs = (data || []).filter(l => l.status === "approved").map(l => l.slug);
+    if (approvedSlugs.length > 0) {
+      const { data: projs } = await supabase.from("projects").select("slug, status").in("slug", approvedSlugs);
+      const map: Record<string, string> = {};
+      (projs || []).forEach(p => { map[p.slug] = p.status; });
+      setProjectStatuses(map);
+    }
+  };
+
+  const toggleSoldOut = async (slug: string) => {
+    const current = projectStatuses[slug];
+    const newStatus = current === "sold_out" ? "active" : "sold_out";
+    const { error } = await supabase.from("projects").update({ status: newStatus }).eq("slug", slug);
+    if (error) { alert("Could not update: " + error.message); return; }
+    setProjectStatuses({ ...projectStatuses, [slug]: newStatus });
   };
 
   const deleteAd = async (id: number) => {
@@ -80,35 +96,45 @@ export default function MyAdsPage() {
 
         <div className="space-y-3">
           {listings.length === 0 && <p className="text-center text-gray-400 py-10">You haven't posted any ads yet.</p>}
-          {listings.map((item) => (
-            <div key={item.id} className="bg-white p-4 rounded-xl shadow">
-              <div className="flex gap-3">
-                {item.image && <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded-lg" />}
-                <div className="flex-1">
-                  <h3 className="font-bold text-sm" style={{ color: "#0a1628" }}>{item.name}</h3>
-                  <p className="text-xs text-gray-500">{item.location}</p>
-                  <p className="text-xs font-bold mt-1" style={{ color: "#c9a84c" }}>{item.price}</p>
-                  <span className={`text-xs px-2 py-0.5 rounded-full mt-1 inline-block font-bold ${
-                    item.status === "approved" ? "bg-green-100 text-green-700" :
-                    item.status === "rejected" ? "bg-red-100 text-red-700" : "bg-yellow-100 text-yellow-700"
-                  }`}>
-                    {item.status === "approved" ? "Approved" : item.status === "rejected" ? "Rejected" : "Pending Review"}
-                  </span>
+          {listings.map((item) => {
+            const projStatus = projectStatuses[item.slug];
+            return (
+              <div key={item.id} className="bg-white p-4 rounded-xl shadow">
+                <div className="flex gap-3">
+                  {item.image && <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded-lg" />}
+                  <div className="flex-1">
+                    <h3 className="font-bold text-sm" style={{ color: "#0a1628" }}>{item.name}</h3>
+                    <p className="text-xs text-gray-500">{item.location}</p>
+                    <p className="text-xs font-bold mt-1" style={{ color: "#c9a84c" }}>{item.price}</p>
+                    <span className={`text-xs px-2 py-0.5 rounded-full mt-1 inline-block font-bold ${
+                      item.status === "approved" ? "bg-green-100 text-green-700" :
+                      item.status === "rejected" ? "bg-red-100 text-red-700" : "bg-yellow-100 text-yellow-700"
+                    }`}>
+                      {item.status === "approved" ? (projStatus === "sold_out" ? "Sold Out" : "Live") : item.status === "rejected" ? "Rejected" : "Pending Review"}
+                    </span>
+                  </div>
                 </div>
+
+                {item.status === "approved" && (
+                  <button onClick={() => toggleSoldOut(item.slug)} className="w-full mt-3 text-xs py-2 rounded-lg font-bold text-white" style={{ background: projStatus === "sold_out" ? "#22c55e" : "#f59e0b" }}>
+                    {projStatus === "sold_out" ? "Mark Active Again" : "Mark as Sold Out"}
+                  </button>
+                )}
+
+                {item.status === "rejected" && item.reject_reason && (
+                  <div className="mt-3 p-2 bg-red-50 border border-red-200 rounded-lg">
+                    <p className="text-xs text-red-700"><b>Reason:</b> {item.reject_reason}</p>
+                  </div>
+                )}
+                {item.status === "rejected" && (
+                  <div className="flex gap-2 mt-3">
+                    <button onClick={() => setEditingAd(item)} className="flex-1 text-xs px-3 py-2 rounded-lg font-bold text-white bg-blue-600">Edit & Resubmit</button>
+                    <button onClick={() => deleteAd(item.id)} className="flex-1 text-xs px-3 py-2 rounded-lg font-bold text-white bg-red-600">Delete</button>
+                  </div>
+                )}
               </div>
-              {item.status === "rejected" && item.reject_reason && (
-                <div className="mt-3 p-2 bg-red-50 border border-red-200 rounded-lg">
-                  <p className="text-xs text-red-700"><b>Reason:</b> {item.reject_reason}</p>
-                </div>
-              )}
-              {item.status === "rejected" && (
-                <div className="flex gap-2 mt-3">
-                  <button onClick={() => setEditingAd(item)} className="flex-1 text-xs px-3 py-2 rounded-lg font-bold text-white bg-blue-600">Edit & Resubmit</button>
-                  <button onClick={() => deleteAd(item.id)} className="flex-1 text-xs px-3 py-2 rounded-lg font-bold text-white bg-red-600">Delete</button>
-                </div>
-              )}
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </main>

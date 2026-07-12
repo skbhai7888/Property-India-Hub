@@ -150,7 +150,16 @@ export default function PartnerPage() {
           </div>
         )}
 
-        {profile?.role === "partner" && (
+        {profile?.role === "partner" && profile.partner_active === false && (
+          <div className="bg-red-50 border-2 border-red-400 p-6 rounded-xl text-center">
+            <p className="font-bold text-red-700 mb-2">Your Partner Account is Deactivated</p>
+            <p className="text-sm text-red-600 mb-4">Please contact our support team to reactivate your account or resolve any issues.</p>
+            <a href="tel:+917820008509" className="block py-3 rounded-lg font-bold text-white bg-red-600 mb-2">Call: +91 7820008509</a>
+            <a href="mailto:propertyindiahubs@gmail.com" className="block py-3 rounded-lg font-bold" style={{background:"#0a1628", color:"white"}}>propertyindiahubs@gmail.com</a>
+          </div>
+        )}
+
+        {profile?.role === "partner" && profile.partner_active !== false && (
           <>
             <div className="bg-white p-5 rounded-xl shadow mb-4">
               <p className="text-sm font-bold mb-2" style={{ color: "#0a1628" }}>Your Referral Link</p>

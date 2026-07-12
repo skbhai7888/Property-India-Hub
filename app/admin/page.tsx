@@ -212,6 +212,27 @@ export default function AdminDashboard() {
     setTimeout(() => setActionMsg(""), 3000);
   };
 
+  const togglePartnerActive = async (p: any) => {
+    const newActive = p.partner_active === false ? true : false;
+    const { error } = await supabase.from("user_profiles").update({ partner_active: newActive }).eq("id", p.id);
+    if (error) { setActionError("Update failed: " + error.message); return; }
+    setActionMsg(newActive ? "Partner activated." : "Partner deactivated.");
+    loadAllUsers();
+    setTimeout(() => setActionMsg(""), 3000);
+  };
+
+  const deletePartnerAccount = async (p: any) => {
+    if (!confirm(`Remove "${p.name}" as a partner? Their account will become a normal user.`)) return;
+    const { error } = await supabase.from("user_profiles").update({
+      role: "user", partner_status: "none", referral_code: null, partner_active: true,
+      partner_city: null, partner_experience: null, partner_reason: null, terms_accepted: false
+    }).eq("id", p.id);
+    if (error) { setActionError("Delete failed: " + error.message); return; }
+    setActionMsg("Partner removed.");
+    loadAllUsers();
+    setTimeout(() => setActionMsg(""), 3000);
+  };
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     router.push("/login");
@@ -513,7 +534,13 @@ export default function AdminDashboard() {
                   <span className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 mt-1 inline-block">{u.role}</span>
                 </button>
                 {u.role === "partner" && (
-                  <button onClick={() => setReviewPartner(u)} className="text-xs px-3 py-2 rounded-lg font-bold" style={{background: "#c9a84c", color: "#0a1628"}}>Partner Info</button>
+                  <button onClick={() => togglePartnerActive(u)} className="text-xs px-3 py-2 rounded-lg font-bold text-white shrink-0" style={{background: u.partner_active === false ? "#22c55e" : "#f59e0b"}}>{u.partner_active === false ? "Activate" : "Deactivate"}</button>
+                )}
+                {u.role === "partner" && (
+                  <>
+                    <button onClick={() => setReviewPartner(u)} className="text-xs px-3 py-2 rounded-lg font-bold" style={{background: "#c9a84c", color: "#0a1628"}}>Partner Info</button>
+                <button onClick={() => deletePartnerAccount(u)} className="text-xs px-3 py-2 rounded-lg font-bold text-white bg-red-600 shrink-0">Delete</button>
+                  </>
                 )}
               </div>
             ))}

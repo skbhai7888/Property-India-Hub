@@ -35,7 +35,7 @@ export default function BottomNav() {
   const items = [
     { href: "/", label: "Home" },
     { href: "/my-ads", label: "My Ads" },
-    { href: "/partner", label: "Broker" },
+    { href: "/partner", label: "Partner" },
     { href: "/#projects-section", label: "Projects", onClick: handleProjectsClick },
     { href: loggedIn ? "/profile" : "/login", label: loggedIn ? "Profile" : "Login" },
   ];

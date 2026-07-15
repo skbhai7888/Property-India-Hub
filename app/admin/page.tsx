@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "../../lib/supabase";
+import SiteVisitsPanel from "./SiteVisitsPanel";
 
 export default function AdminDashboard() {
   const [projects, setProjects] = useState<any[]>([]);
@@ -13,7 +14,7 @@ export default function AdminDashboard() {
   const [checking, setChecking] = useState(true);
   const [actionMsg, setActionMsg] = useState("");
   const [actionError, setActionError] = useState("");
-  const [view, setView] = useState<"main" | "allUsers" | "normalUsers" | "partners" | "userAds" | "pendingList" | "approvedList" | "rejectedList" | "partnerPending" | "partnerRejected">("main");
+  const [view, setView] = useState<"main" | "allUsers" | "normalUsers" | "partners" | "userAds" | "pendingList" | "approvedList" | "rejectedList" | "partnerPending" | "partnerRejected" | "siteVisits">("main");
   const [selectedUser, setSelectedUser] = useState<any>(null);
   const [selectedUserAds, setSelectedUserAds] = useState<any[]>([]);
   const [reviewAd, setReviewAd] = useState<any>(null);
@@ -25,6 +26,16 @@ export default function AdminDashboard() {
   const [partnerRejectReason, setPartnerRejectReason] = useState("");
   const [commissionAmount, setCommissionAmount] = useState("");
   const [commissionNote, setCommissionNote] = useState("");
+  const [promoteEmail, setPromoteEmail] = useState("");
+  const [promoteMsg, setPromoteMsg] = useState("");
+
+  async function handlePromote() {
+    if (!promoteEmail) return;
+    const { data, error } = await supabase.rpc("promote_to_admin", { target_email: promoteEmail });
+    if (error) { setPromoteMsg("Error: " + error.message); return; }
+    setPromoteMsg(data);
+    setPromoteEmail("");
+  }
   const router = useRouter();
 
   useEffect(() => {
@@ -131,7 +142,7 @@ export default function AdminDashboard() {
       description: ad.description, sizes: ad.sizes, amenities: ad.amenities,
       highlights: ad.highlights, payment: ad.payment,
       image: ad.image, gallery_images: ad.gallery_images, video_url: ad.video_url,
-      status: "active", source: "user"
+      status: "active", source: "user", user_id: ad.user_id
     });
     if (insertErr) { setActionError("Insert failed: " + insertErr.message); return; }
 
@@ -412,6 +423,17 @@ export default function AdminDashboard() {
     );
   }
 
+  if (view === "siteVisits") {
+    return (
+      <div className="min-h-screen" style={{background: "#f8f9fa"}}>
+        <div className="max-w-4xl mx-auto p-4">
+          <button onClick={() => setView("main")} className="text-sm font-bold mb-4" style={{color: "#0a1628"}}>← Back to Dashboard</button>
+          <SiteVisitsPanel />
+        </div>
+      </div>
+    );
+  }
+
   if (view === "pendingList" || view === "rejectedList") {
     const list = view === "pendingList" ? pendingAds : rejectedAds;
     const title = view === "pendingList" ? "All Pending Ads" : "All Rejected Ads";
@@ -585,6 +607,21 @@ export default function AdminDashboard() {
             <p className="font-bold text-xl" style={{color: "#c9a84c"}}>{normalUsers.length}</p>
             <p className="text-xs text-gray-500">Normal Users</p>
           </button>
+          <button onClick={() => setView("siteVisits")} className="p-4 bg-white rounded-xl shadow text-center" style={{border: "2px solid #0a1628"}}>
+            <p className="font-bold text-xl" style={{color: "#0a1628"}}>🏠</p>
+            <p className="text-xs text-gray-500">Site Visit Requests</p>
+          </button>
+        </div>
+
+        <div className="bg-white rounded-xl shadow p-4 mb-6">
+          <h3 className="font-bold mb-2" style={{color: "#0a1628"}}>👑 Make Someone Admin</h3>
+          <p className="text-xs text-gray-500 mb-3">Enter the email of a user who has already signed up to give them admin access.</p>
+          <div className="flex gap-2">
+            <input placeholder="user@email.com" value={promoteEmail} onChange={e => setPromoteEmail(e.target.value)}
+              className="flex-1 border rounded-lg p-2 text-sm" style={{borderColor: "#0a1628"}} />
+            <button onClick={handlePromote} className="px-4 py-2 rounded-lg font-bold text-sm text-white" style={{background: "#0a1628"}}>Make Admin</button>
+          </div>
+          {promoteMsg && <p className="text-xs mt-2 font-bold" style={{color: promoteMsg.includes("Error") || promoteMsg.includes("not found") ? "#b91c1c" : "#16a34a"}}>{promoteMsg}</p>}
         </div>
 
         <h2 className="text-lg font-bold mb-2" style={{color: "#0a1628"}}>Property Ads</h2>

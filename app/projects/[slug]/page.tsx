@@ -56,7 +56,9 @@ export default function ProjectPage() {
       if (projectData.user_id) {
         const { data: posterProfile } = await supabase.from('user_profiles').select('phone').eq('id', projectData.user_id).single();
         if (posterProfile && posterProfile.phone) {
-          setPosterPhone(posterProfile.phone.replace(/[^0-9]/g, ''));
+          let cleanPhone = posterProfile.phone.replace(/[^0-9]/g, '');
+          if (cleanPhone.length === 10) { cleanPhone = '91' + cleanPhone; }
+          setPosterPhone(cleanPhone);
         }
       }
       const gallery = projectData.gallery_images ? projectData.gallery_images.split('|').filter(Boolean) : [];

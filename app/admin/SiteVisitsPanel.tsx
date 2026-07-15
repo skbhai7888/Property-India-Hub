@@ -23,11 +23,6 @@ export default function SiteVisitsPanel() {
 
   function matchesFilter(v: any) {
     if (filter === 'all') return true;
-    {v.poster_name ? (
-      <p className="text-xs mt-1 font-bold" style={{color: '#0a1628'}}>👤 Poster: {v.poster_name} ({v.poster_phone})</p>
-    ) : (
-      <p className="text-xs mt-1 text-gray-400">👤 Poster: Not linked (admin-added listing)</p>
-    )}
     if (filter === 'today') return v.preferred_date === 'Today';
     if (filter === 'week') return v.preferred_date === 'This Week';
     if (filter === 'next') return v.preferred_date === 'Next Week';
@@ -65,6 +60,11 @@ export default function SiteVisitsPanel() {
                 <p className="font-bold text-sm" style={{color: '#0a1628'}}>{v.name}</p>
                 <p className="text-xs text-gray-500">{v.phone}</p>
                 <p className="text-xs text-gray-500 mt-1">📍 {v.project_name}</p>
+                {v.poster_name ? (
+                <p className="text-xs mt-1 font-bold" style={{color: '#0a1628'}}>👤 Poster: {v.poster_name} ({v.poster_phone})</p>
+                ) : (
+                <p className="text-xs mt-1 text-gray-400">👤 Poster: Not linked (admin-added listing)</p>
+                )}
                 <p className="text-xs mt-1" style={{color: '#c9a84c'}}>🗓️ {v.preferred_date}</p>
                 {v.message && <p className="text-xs text-gray-400 mt-1">{v.message}</p>}
               </div>

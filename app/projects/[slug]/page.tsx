@@ -29,6 +29,7 @@ export default function ProjectPage() {
   const params = useParams();
   const slug = params.slug as string;
   const [project, setProject] = useState<any>(null);
+  const [posterPhone, setPosterPhone] = useState('');
   const [nearbyProjects, setNearbyProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({ firstName: '', lastName: '', mobile: '', email: '', visitDate: 'This Week', submitted: false });
@@ -52,6 +53,12 @@ export default function ProjectPage() {
     const { data: projectData } = await supabase.from('projects').select('*').eq('slug', slug).single();
     setProject(projectData);
     if (projectData) {
+      if (projectData.user_id) {
+        const { data: posterProfile } = await supabase.from('user_profiles').select('phone').eq('id', projectData.user_id).single();
+        if (posterProfile && posterProfile.phone) {
+          setPosterPhone(posterProfile.phone.replace(/[^0-9]/g, ''));
+        }
+      }
       const gallery = projectData.gallery_images ? projectData.gallery_images.split('|').filter(Boolean) : [];
       const images = [projectData.image, ...gallery].filter(Boolean);
       setAllImages(images);
@@ -66,7 +73,7 @@ export default function ProjectPage() {
     if (navigator.share) {
       await navigator.share({ title: project.name, text, url: window.location.href });
     } else {
-      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
+      window.open(`https://wa.me/${posterPhone || '917820008509'}?text=${encodeURIComponent(text)}`);
     }
   };
 
@@ -273,10 +280,10 @@ export default function ProjectPage() {
         )}
 
         <div className="grid grid-cols-3 gap-3 mb-3">
-          <a href={`https://wa.me/917820008509?text=I am interested in ${project.name}, ${project.location}. Please share details.`} className="flex items-center justify-center gap-1 text-white py-3 rounded-xl font-bold text-xs" style={{background: '#25D366'}}>
+          <a href={`https://wa.me/${posterPhone || '917820008509'}?text=I am interested in ${project.name}, ${project.location}. Please share details.`} className="flex items-center justify-center gap-1 text-white py-3 rounded-xl font-bold text-xs" style={{background: '#25D366'}}>
             <WhatsAppIcon size={14} /> WhatsApp
           </a>
-          <a href="tel:+917820008509" className="flex items-center justify-center gap-1 text-white py-3 rounded-xl font-bold text-xs" style={{background: '#0a1628'}}>
+          <a href={`tel:+${posterPhone || '917820008509'}`} className="flex items-center justify-center gap-1 text-white py-3 rounded-xl font-bold text-xs" style={{background: '#0a1628'}}>
             <PhoneIcon size={14} /> Call
           </a>
           <button onClick={handleShare} className="flex items-center justify-center gap-1 text-black py-3 rounded-xl font-bold text-xs" style={{background: '#c9a84c'}}>
@@ -349,10 +356,10 @@ export default function ProjectPage() {
       </div>
 
       <div className="fixed bottom-6 right-4 flex flex-col gap-3 z-40">
-        <a href="tel:+917820008509" className="text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl" style={{background: '#0a1628'}}>
+        <a href={`tel:+${posterPhone || '917820008509'}`} className="text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl" style={{background: '#0a1628'}}>
           <PhoneIcon size={24} />
         </a>
-        <a href="https://wa.me/917820008509" className="text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl" style={{background: '#25D366'}}>
+        <a href={`https://wa.me/${posterPhone || '917820008509'}`} className="text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl" style={{background: '#25D366'}}>
           <WhatsAppIcon size={24} />
         </a>
       </div>

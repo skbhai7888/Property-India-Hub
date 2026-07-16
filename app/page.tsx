@@ -49,7 +49,13 @@ export default async function Home() {
   if (userIds.length > 0) {
     const { data: posters } = await supabase.from("public_poster_contact").select("id, phone").in("id", userIds);
     if (posters) {
-      posters.forEach((p: any) => { if (p.phone) phoneMap[p.id] = p.phone; });
+      posters.forEach((p: any) => {
+        if (p.phone) {
+          let cleanPhone = p.phone.replace(/[^0-9]/g, '');
+          if (cleanPhone.length === 10) { cleanPhone = '91' + cleanPhone; }
+          phoneMap[p.id] = cleanPhone;
+        }
+      });
     }
   }
   const projectsWithPoster = (projects || []).map((p: any) => ({

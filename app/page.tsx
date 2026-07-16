@@ -47,7 +47,7 @@ export default async function Home() {
   const userIds = Array.from(new Set((projects || []).map((p: any) => p.user_id).filter(Boolean)));
   let phoneMap: Record<string, string> = {};
   if (userIds.length > 0) {
-    const { data: posters } = await supabase.from("user_profiles").select("id, phone").in("id", userIds);
+    const { data: posters } = await supabase.from("public_poster_contact").select("id, phone").in("id", userIds);
     if (posters) {
       posters.forEach((p: any) => { if (p.phone) phoneMap[p.id] = p.phone; });
     }

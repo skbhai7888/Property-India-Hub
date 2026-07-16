@@ -54,7 +54,7 @@ export default function ProjectPage() {
     setProject(projectData);
     if (projectData) {
       if (projectData.user_id) {
-        const { data: posterProfile } = await supabase.from('user_profiles').select('phone').eq('id', projectData.user_id).single();
+        const { data: posterProfile } = await supabase.from('public_poster_contact').select('phone').eq('id', projectData.user_id).single();
         if (posterProfile && posterProfile.phone) {
           let cleanPhone = posterProfile.phone.replace(/[^0-9]/g, '');
           if (cleanPhone.length === 10) { cleanPhone = '91' + cleanPhone; }

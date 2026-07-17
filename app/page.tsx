@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 import ProjectsSection from '../components/ProjectsSection';
 import { supabase } from '../lib/supabase';
 import HamburgerMenu from '../components/HamburgerMenu';
@@ -118,7 +119,7 @@ export default async function Home() {
         </div>
       </section>
 
-        <ProjectsSection projects={projectsWithPoster} />
+        <Suspense fallback={null}><ProjectsSection projects={projectsWithPoster} /></Suspense>
 
       <section className="text-white py-10 px-4 text-center" style={{background: '#0a1628'}}>
         <h3 className="text-xl font-bold mb-1">Aaj Hi Contact Karein</h3>

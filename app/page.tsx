@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import ProjectsSection from '../components/ProjectsSection';
 import { supabase } from '../lib/supabase';
 import HamburgerMenu from '../components/HamburgerMenu';
+import ProfileAvatar from '../components/ProfileAvatar';
 
 const LOGO = "https://res.cloudinary.com/deeolaopc/image/upload/v1782739062/Property_India_Hub_jbrp94.jpg";
 
@@ -42,6 +43,8 @@ const PhoneIcon = () => (
   </svg>
 );
 
+
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const { data: projects } = await supabase.from("projects").select("*");

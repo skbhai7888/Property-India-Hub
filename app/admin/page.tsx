@@ -28,13 +28,35 @@ export default function AdminDashboard() {
   const [commissionNote, setCommissionNote] = useState("");
   const [promoteEmail, setPromoteEmail] = useState("");
   const [promoteMsg, setPromoteMsg] = useState("");
+  const [admins, setAdmins] = useState<any[]>([]);
+  const [selectedPerms, setSelectedPerms] = useState<string[]>([]);
 
   async function handlePromote() {
     if (!promoteEmail) return;
-    const { data, error } = await supabase.rpc("promote_to_admin", { target_email: promoteEmail });
+    const permsObj: Record<string, boolean> = {};
+    selectedPerms.forEach(p => { permsObj[p] = true; });
+    const { data, error } = await supabase.rpc("promote_to_admin_with_permissions", { target_email: promoteEmail, perms: permsObj });
     if (error) { setPromoteMsg("Error: " + error.message); return; }
     setPromoteMsg(data);
     setPromoteEmail("");
+    setSelectedPerms([]);
+    loadAdmins();
+  }
+
+  function togglePerm(perm: string) {
+    setSelectedPerms(prev => prev.includes(perm) ? prev.filter(p => p !== perm) : [...prev, perm]);
+  }
+
+  async function loadAdmins() {
+    const { data } = await supabase.from("user_profiles").select("id, name, phone, role").eq("role", "admin");
+    setAdmins(data || []);
+  }
+
+  async function handleDemote(id: string) {
+    if (!confirm("Are you sure you want to remove admin access for this user?")) return;
+    const { data, error } = await supabase.rpc("demote_admin_by_id", { target_id: id });
+    if (error) { alert("Error: " + error.message); return; }
+    loadAdmins();
   }
   const router = useRouter();
 
@@ -48,6 +70,7 @@ export default function AdminDashboard() {
     const { data: profile } = await supabase.from("user_profiles").select("role").eq("id", user.id).single();
     if (profile?.role !== "admin") { router.push("/"); return; }
     setChecking(false);
+    loadAdmins();
     loadAll();
   };
 
@@ -621,7 +644,31 @@ export default function AdminDashboard() {
               className="flex-1 border rounded-lg p-2 text-sm" style={{borderColor: "#0a1628"}} />
             <button onClick={handlePromote} className="px-4 py-2 rounded-lg font-bold text-sm text-white" style={{background: "#0a1628"}}>Make Admin</button>
           </div>
+
+          <p className="text-xs font-semibold mt-3 mb-1" style={{color: "#0a1628"}}>Select access for this admin:</p>
+          <div className="grid grid-cols-2 gap-2 mb-2">
+            {["property_ads", "partners", "users", "projects", "site_visits", "promote_admin"].map(perm => (
+              <label key={perm} className="flex items-center gap-2 text-xs">
+                <input type="checkbox" checked={selectedPerms.includes(perm)} onChange={() => togglePerm(perm)} />
+                {perm.replace("_", " ")}
+              </label>
+            ))}
+          </div>
           {promoteMsg && <p className="text-xs mt-2 font-bold" style={{color: promoteMsg.includes("Error") || promoteMsg.includes("not found") ? "#b91c1c" : "#16a34a"}}>{promoteMsg}</p>}
+
+          <h4 className="text-sm font-bold mt-4 mb-2" style={{color: "#0a1628"}}>Current Admins</h4>
+          <div className="flex flex-col gap-2">
+            {admins.map(a => (
+              <div key={a.id} className="flex justify-between items-center border rounded-lg p-2 text-sm">
+                <div>
+                  <p className="font-bold">{a.name || "No name"}</p>
+                  <p className="text-xs text-gray-500">{a.phone}</p>
+                </div>
+                <button onClick={() => handleDemote(a.id)} className="text-xs px-3 py-1 rounded-lg font-bold text-white" style={{background: "#b91c1c"}}>Remove Admin</button>
+              </div>
+            ))}
+            {admins.length === 0 && <p className="text-xs text-gray-400">No admins found.</p>}
+          </div>
         </div>
 
         <h2 className="text-lg font-bold mb-2" style={{color: "#0a1628"}}>Property Ads</h2>

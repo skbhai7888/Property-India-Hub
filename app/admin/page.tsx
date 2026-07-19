@@ -30,6 +30,8 @@ export default function AdminDashboard() {
   const [promoteMsg, setPromoteMsg] = useState("");
   const [admins, setAdmins] = useState<any[]>([]);
   const [selectedPerms, setSelectedPerms] = useState<string[]>([]);
+  const [myPhone, setMyPhone] = useState("");
+  const [myPerms, setMyPerms] = useState<Record<string, boolean>>({});
 
   async function handlePromote() {
     if (!promoteEmail) return;
@@ -46,6 +48,8 @@ export default function AdminDashboard() {
   function togglePerm(perm: string) {
     setSelectedPerms(prev => prev.includes(perm) ? prev.filter(p => p !== perm) : [...prev, perm]);
   }
+
+  const canDo = (perm: string) => myPhone === "7820008509" || myPerms?.[perm] === true;
 
   async function loadAdmins() {
     const { data } = await supabase.from("user_profiles").select("id, name, phone, role").eq("role", "admin");
@@ -67,8 +71,10 @@ export default function AdminDashboard() {
   const checkAdminAndLoad = async () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) { router.push("/login"); return; }
-    const { data: profile } = await supabase.from("user_profiles").select("role").eq("id", user.id).single();
+    const { data: profile } = await supabase.from("user_profiles").select("role, phone, admin_permissions").eq("id", user.id).single();
     if (profile?.role !== "admin") { router.push("/"); return; }
+    setMyPhone(profile?.phone || "");
+    setMyPerms(profile?.admin_permissions || {});
     setChecking(false);
     loadAdmins();
     loadAll();
@@ -630,13 +636,16 @@ export default function AdminDashboard() {
             <p className="font-bold text-xl" style={{color: "#c9a84c"}}>{normalUsers.length}</p>
             <p className="text-xs text-gray-500">Normal Users</p>
           </button>
-          <button onClick={() => setView("siteVisits")} className="p-4 bg-white rounded-xl shadow text-center" style={{border: "2px solid #0a1628"}}>
+          {canDo("site_visits") && (
+<button onClick={() => setView("siteVisits")} className="p-4 bg-white rounded-xl shadow text-center" style={{border: "2px solid #0a1628"}}>
             <p className="font-bold text-xl" style={{color: "#0a1628"}}>🏠</p>
             <p className="text-xs text-gray-500">Site Visit Requests</p>
           </button>
+)}
         </div>
 
-        <div className="bg-white rounded-xl shadow p-4 mb-6">
+        {canDo("promote_admin") && (
+<div className="bg-white rounded-xl shadow p-4 mb-6">
           <h3 className="font-bold mb-2" style={{color: "#0a1628"}}>👑 Make Someone Admin</h3>
           <p className="text-xs text-gray-500 mb-3">Enter the email of a user who has already signed up to give them admin access.</p>
           <div className="flex gap-2">
@@ -670,8 +679,11 @@ export default function AdminDashboard() {
             {admins.length === 0 && <p className="text-xs text-gray-400">No admins found.</p>}
           </div>
         </div>
+)}
 
-        <h2 className="text-lg font-bold mb-2" style={{color: "#0a1628"}}>Property Ads</h2>
+        {canDo("property_ads") && (
+<>
+<h2 className="text-lg font-bold mb-2" style={{color: "#0a1628"}}>Property Ads</h2>
         <div className="grid grid-cols-3 gap-3 mb-6">
           <button onClick={() => setView("pendingList")} className="rounded-xl p-4 text-center shadow-md text-white" style={{background: "linear-gradient(135deg, #f59e0b, #d97706)"}}>
             <p className="text-2xl font-bold">{pendingAds.length}</p>
@@ -686,8 +698,12 @@ export default function AdminDashboard() {
             <p className="text-xs font-semibold mt-1">❌ Rejected</p>
           </button>
         </div>
+</>
+)}
 
-        <h2 className="text-lg font-bold mb-2" style={{color: "#0a1628"}}>Partner Applications</h2>
+        {canDo("partners") && (
+<>
+<h2 className="text-lg font-bold mb-2" style={{color: "#0a1628"}}>Partner Applications</h2>
         <div className="grid grid-cols-3 gap-3 mb-8">
           <button onClick={() => setView("partnerPending")} className="rounded-xl p-4 text-center shadow-md text-white" style={{background: "linear-gradient(135deg, #f59e0b, #d97706)"}}>
             <p className="text-2xl font-bold">{partnerPendingList.length}</p>
@@ -702,6 +718,8 @@ export default function AdminDashboard() {
             <p className="text-xs font-semibold mt-1">❌ Rejected</p>
           </button>
         </div>
+</>
+)}
 
         <h2 className="text-xl font-bold mb-3" style={{color: "#0a1628"}}>All Projects</h2>
         <div className="space-y-3">

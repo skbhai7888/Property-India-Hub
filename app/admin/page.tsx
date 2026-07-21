@@ -611,7 +611,9 @@ export default function AdminDashboard() {
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold" style={{color: "#0a1628"}}>Admin Dashboard</h1>
           <div className="flex gap-2">
-            <a href="/admin/add-project" className="text-sm px-4 py-2 rounded-lg font-bold text-white" style={{background: "#c9a84c"}}>+ Add Project</a>
+            {canDo("projects") && (
+<a href="/admin/add-project" className="text-sm px-4 py-2 rounded-lg font-bold text-white" style={{background: "#c9a84c"}}>+ Add Project</a>
+)}
             <button onClick={handleLogout} className="text-sm px-4 py-2 rounded-lg bg-gray-200">Logout</button>
           </div>
         </div>
@@ -620,22 +622,30 @@ export default function AdminDashboard() {
         {actionError && <div className="mb-4 p-3 rounded-lg bg-red-50 border-2 border-red-500 text-red-700 text-sm font-bold">{actionError}</div>}
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-          <div className="p-4 bg-white rounded-xl shadow text-center">
+          {canDo("projects") && (
+<div className="p-4 bg-white rounded-xl shadow text-center">
             <p className="font-bold text-xl" style={{color: "#0a1628"}}>{projects.length}</p>
             <p className="text-xs text-gray-500">Total Projects</p>
           </div>
-          <button onClick={() => setView("allUsers")} className="p-4 bg-white rounded-xl shadow text-center">
+)}
+          {canDo("users") && (
+<button onClick={() => setView("allUsers")} className="p-4 bg-white rounded-xl shadow text-center">
             <p className="font-bold text-xl" style={{color: "#c9a84c"}}>{allUsers.length}</p>
             <p className="text-xs text-gray-500">Total Users</p>
           </button>
-          <button onClick={() => setView("partners")} className="p-4 bg-white rounded-xl shadow text-center">
+)}
+          {canDo("partners") && (
+<button onClick={() => setView("partners")} className="p-4 bg-white rounded-xl shadow text-center">
             <p className="font-bold text-xl" style={{color: "#0a1628"}}>{partners.length}</p>
             <p className="text-xs text-gray-500">Partners / Brokers</p>
           </button>
-          <button onClick={() => setView("normalUsers")} className="p-4 bg-white rounded-xl shadow text-center">
+)}
+          {canDo("users") && (
+<button onClick={() => setView("normalUsers")} className="p-4 bg-white rounded-xl shadow text-center">
             <p className="font-bold text-xl" style={{color: "#c9a84c"}}>{normalUsers.length}</p>
             <p className="text-xs text-gray-500">Normal Users</p>
           </button>
+)}
           {canDo("site_visits") && (
 <button onClick={() => setView("siteVisits")} className="p-4 bg-white rounded-xl shadow text-center" style={{border: "2px solid #0a1628"}}>
             <p className="font-bold text-xl" style={{color: "#0a1628"}}>🏠</p>
@@ -721,7 +731,9 @@ export default function AdminDashboard() {
 </>
 )}
 
-        <h2 className="text-xl font-bold mb-3" style={{color: "#0a1628"}}>All Projects</h2>
+        {canDo("projects") && (
+<>
+<h2 className="text-xl font-bold mb-3" style={{color: "#0a1628"}}>All Projects</h2>
         <div className="space-y-3">
           {projects.map((project) => (
             <div key={project.id} className="bg-white p-4 rounded-xl shadow flex items-center justify-between gap-4">
@@ -742,6 +754,8 @@ export default function AdminDashboard() {
             </div>
           ))}
         </div>
+</>
+)}
       </div>
     </main>
   );

@@ -106,7 +106,7 @@ export default function ProjectsSection({ projects }: { projects: any[] }) {
         {filtered.length} {filtered.length === 1 ? "property found" : "properties found"}
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filtered.map((project: any, i: number) => {
+        {[...filtered].sort((a: any, b: any) => (b.is_featured ? 1 : 0) - (a.is_featured ? 1 : 0)).map((project: any, i: number) => {
           const isSoldOut = project.status === "sold_out";
           return (
             <div key={i} className={`bg-white border rounded-xl shadow-md overflow-hidden relative ${isSoldOut ? "opacity-90" : ""}`}>
@@ -115,6 +115,11 @@ export default function ProjectsSection({ projects }: { projects: any[] }) {
                   <span className="bg-red-600 text-white font-extrabold text-sm px-6 py-1.5 rounded-full shadow-lg tracking-wide">
                     SOLD OUT
                   </span>
+                </div>
+              )}
+              {project.is_featured && !isSoldOut && (
+                <div className="absolute top-3 left-3 z-20">
+                  <span className="text-xs font-bold px-3 py-1 rounded-full shadow-lg" style={{background: '#c9a84c', color: '#0a1628'}}>⭐ Featured</span>
                 </div>
               )}
               <Link href={`/projects/${project.slug}`} className="block">

@@ -143,6 +143,11 @@ export default function AdminDashboard() {
     loadProjects();
   };
 
+  const toggleFeatured = async (id: number, current: boolean) => {
+    await supabase.from("projects").update({ is_featured: !current }).eq("id", id);
+    loadProjects();
+  };
+
   const deleteProject = async (id: number, name: string) => {
     if (!confirm(`Kya aap sach mein "${name}" ko delete karna chahte hain?`)) return;
     await supabase.from("projects").delete().eq("id", id);
@@ -748,6 +753,9 @@ export default function AdminDashboard() {
                 <a href={`/admin/edit-project/${project.slug}`} className="text-xs px-3 py-2 rounded-lg font-bold text-white bg-blue-600">Edit</a>
                 <button onClick={() => toggleSoldOut(project.id, project.status)} className="text-xs px-3 py-2 rounded-lg font-bold text-white" style={{background: project.status === 'sold_out' ? '#22c55e' : '#f59e0b'}}>
                   {project.status === 'sold_out' ? 'Mark Active' : 'Mark Sold Out'}
+                </button>
+                <button onClick={() => toggleFeatured(project.id, project.is_featured)} className="text-xs px-3 py-2 rounded-lg font-bold text-white" style={{background: project.is_featured ? '#6b7280' : '#c9a84c'}}>
+                  {project.is_featured ? 'Unmark Featured' : '⭐ Mark Featured'}
                 </button>
                 <button onClick={() => deleteProject(project.id, project.name)} className="text-xs px-3 py-2 rounded-lg font-bold text-white bg-red-600">Delete</button>
               </div>

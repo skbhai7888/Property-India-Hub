@@ -131,6 +131,36 @@ export default function ProjectPage() {
 
   return (
     <main className="min-h-screen bg-gray-50">
+      {project && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              name: project.name,
+              description: project.description,
+              image: project.image,
+              url: `https://property-india-hub.vercel.app/projects/${project.slug}`,
+              brand: { "@type": "Organization", name: "Property India Hub" },
+              category: project.type,
+              offers: {
+                "@type": "Offer",
+                price: (project.price || "").toString().replace(/[^0-9.]/g, ""),
+                priceCurrency: "INR",
+                availability: project.status === "sold_out" ? "https://schema.org/SoldOut" : "https://schema.org/InStock",
+                url: `https://property-india-hub.vercel.app/projects/${project.slug}`,
+                areaServed: project.location,
+              },
+              additionalProperty: [
+                { "@type": "PropertyValue", name: "Location", value: project.location },
+                { "@type": "PropertyValue", name: "Builder", value: project.builder },
+                { "@type": "PropertyValue", name: "RERA", value: project.rera },
+              ],
+            }),
+          }}
+        />
+      )}
       <header className="sticky top-0 z-50 shadow-lg" style={{background: '#0a1628'}}>
         <div className="max-w-4xl mx-auto flex justify-between items-center p-4">
           <Link href="/" className="flex items-center gap-2">

@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -124,10 +125,12 @@ export default function ProjectsSection({ projects }: { projects: any[] }) {
               )}
               <Link href={`/projects/${project.slug}`} className="block">
                 <div className="aspect-square overflow-hidden relative">
-                  <img
+                  <Image
                     src={project.image}
                     alt={project.name}
-                    className={`w-full h-full object-contain bg-gray-100 ${isSoldOut ? "grayscale" : ""}`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className={`object-contain bg-gray-100 ${isSoldOut ? "grayscale" : ""}`}
                   />
                   {!isSoldOut && (
                     <div className="absolute top-2 left-2">

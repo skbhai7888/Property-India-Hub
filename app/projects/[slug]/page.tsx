@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
@@ -367,8 +368,8 @@ export default function ProjectPage() {
               {nearbyProjects.map((p) => (
                 <Link href={`/projects/${p.slug}`} key={p.slug}>
                   <div className="bg-white rounded-xl shadow overflow-hidden flex">
-                    <div className="w-28 h-24 flex-shrink-0 overflow-hidden">
-                      <img src={p.image} alt={p.name} className="w-full h-full object-contain bg-gray-100" />
+                    <div className="w-28 h-24 flex-shrink-0 overflow-hidden relative">
+                      <Image src={p.image} alt={p.name} fill sizes="112px" className="object-contain bg-gray-100" />
                     </div>
                     <div className="p-3 flex-1">
                       <span className="text-xs px-2 py-0.5 rounded-full font-bold" style={{background: '#fef3c7', color: '#92400e'}}>{p.tag}</span>

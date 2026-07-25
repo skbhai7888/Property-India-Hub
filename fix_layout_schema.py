@@ -1,19 +1,21 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import BottomNav from "../components/BottomNav";
+import sys
+path = "app/layout.tsx"
+with open(path, "r", encoding="utf-8") as f:
+    c = f.read()
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+def must_have_one(text, label):
+    n = c.count(text)
+    if n != 1:
+        print("FAILED at " + label + ": found " + str(n) + " occurrences (expected 1)")
+        sys.exit(1)
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
+# 1. Expand metadata block: add openGraph + other tags
+old_meta_end = '''export const metadata: Metadata = {
+  title: "Property India Hub - Real Estate Projects in NCR, UP, Rajasthan & Uttarakhand",
+  description: "Property India Hub offers verified residential and commercial property listings across Noida, Greater Noida, Ghaziabad, Mathura, Vrindavan, Ayodhya, Jageshwar Dham, Behror, and more. Book a free site visit today.",
+};'''
+must_have_one(old_meta_end, "metadata-block")
+new_meta = '''export const metadata: Metadata = {
   title: "Property India Hub - Real Estate Projects in NCR, UP, Rajasthan & Uttarakhand",
   description: "Property India Hub offers verified residential and commercial property listings across Noida, Greater Noida, Ghaziabad, Mathura, Vrindavan, Ayodhya, Jageshwar Dham, Behror, and more. Book a free site visit today.",
   metadataBase: new URL("https://property-india-hub.vercel.app"),
@@ -57,19 +59,13 @@ const websiteSchema = {
     target: "https://property-india-hub.vercel.app/search?q={search_term_string}",
     "query-input": "required name=search_term_string",
   },
-};
+};'''
+c = c.replace(old_meta_end, new_meta)
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col pb-16">
+# 2. Insert schema scripts right after <body ...> opening tag
+old_body = '<body className="min-h-full flex flex-col pb-16">{children}<BottomNav /></body>'
+must_have_one(old_body, "body-tag")
+new_body = '''<body className="min-h-full flex flex-col pb-16">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
@@ -78,7 +74,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
-        {children}<BottomNav /></body>
-    </html>
-  );
-}
+        {children}<BottomNav /></body>'''
+c = c.replace(old_body, new_body)
+
+with open(path, "w", encoding="utf-8") as f:
+    f.write(c)
+print("DONE_LAYOUT_SCHEMA")

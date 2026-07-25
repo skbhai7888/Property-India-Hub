@@ -151,6 +151,11 @@ export default async function Home() {
       </section>
 
       <footer className="text-center py-4 text-xs" style={{background: '#060e1a', color: '#c9a84c'}}>
+        <div className="flex gap-4 justify-center text-xs mb-2" style={{color: "#e8d5a3"}}>
+          <a href="/privacy" className="hover:underline">Privacy Policy</a>
+          <a href="/terms" className="hover:underline">Terms &amp; Conditions</a>
+          <a href="/disclaimer" className="hover:underline">Disclaimer</a>
+        </div>
         <p>© 2026 <span className="font-bold">PROPERTY INDIA HUB</span> | All Rights Reserved</p>
         <p className="mt-1" style={{color: '#e8d5a3'}}>Your Trusted Real Estate Partner Across India</p>
       </footer>

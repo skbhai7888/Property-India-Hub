@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { supabase } from "../lib/supabase";
 import { locations } from "../lib/locationsData";
+import { blogPosts } from "../lib/blogData";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://property-india-hub.vercel.app";
@@ -28,5 +29,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...projectRoutes, { url: `${baseUrl}/locations`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.8 }, ...locationRoutes];
+  return [...staticRoutes, ...projectRoutes, { url: `${baseUrl}/locations`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.8 }, ...locationRoutes, { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.8 }, ...blogPosts.map((p) => ({
+    url: `${baseUrl}/blog/${p.slug}`,
+    lastModified: new Date(p.datePublished),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }))];
 }

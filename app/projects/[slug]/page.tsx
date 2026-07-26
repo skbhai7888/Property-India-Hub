@@ -396,6 +396,33 @@ export default function ProjectPage() {
           <WhatsAppIcon size={24} />
         </a>
       </div>
+    <div className="max-w-2xl mx-auto px-4 mb-6">
+      <div className="bg-white rounded-xl shadow p-4">
+        <h2 className="font-bold text-lg mb-3" style={{color: "#0a1628"}}>Frequently Asked Questions</h2>
+        <div className="space-y-3">
+          <div>
+            <p className="text-sm font-bold">Is this project RERA registered?</p>
+            <p className="text-sm text-gray-600">Buyers should independently verify RERA registration status directly with the builder or on the state RERA website before making any payment.</p>
+          </div>
+          <div>
+            <p className="text-sm font-bold">How do I schedule a site visit for this property?</p>
+            <p className="text-sm text-gray-600">Use the "Free Site Visit Book Karo" option on this page, or contact us directly via Call or WhatsApp to arrange a convenient time.</p>
+          </div>
+          <div>
+            <p className="text-sm font-bold">Can I negotiate the listed price?</p>
+            <p className="text-sm text-gray-600">Pricing is set by the property poster (owner, builder, or broker). You can discuss pricing directly with them via the Call or WhatsApp contact shown on this page.</p>
+          </div>
+          <div>
+            <p className="text-sm font-bold">What documents should I check before booking?</p>
+            <p className="text-sm text-gray-600">Typically buyers should review the title deed, RERA registration (if applicable), approved building plans, and any encumbrance certificates. We recommend consulting a legal professional before finalizing any purchase.</p>
+          </div>
+          <div>
+            <p className="text-sm font-bold">Does Property India Hub charge for site visits or inquiries?</p>
+            <p className="text-sm text-gray-600">No, browsing listings, booking a site visit, and contacting posters through Property India Hub is free for buyers and tenants.</p>
+          </div>
+        </div>
+      </div>
+    </div>
     </main>
   );
 }

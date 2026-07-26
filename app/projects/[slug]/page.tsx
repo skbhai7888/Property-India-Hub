@@ -133,6 +133,9 @@ export default function ProjectPage() {
   return (
     <main className="min-h-screen bg-gray-50">
       {project && (
+        <link rel="canonical" href={`https://property-india-hub.vercel.app/projects/${project.slug}`} />
+      )}
+      {project && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

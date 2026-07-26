@@ -40,6 +40,9 @@ export default function LocationPage() {
   return (
     <main className="min-h-screen bg-gray-50 p-4 pb-20">
       {location && (
+        <link rel="canonical" href={`https://property-india-hub.vercel.app/locations/${location.slug}`} />
+      )}
+      {location && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

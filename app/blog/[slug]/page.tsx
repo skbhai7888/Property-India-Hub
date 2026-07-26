@@ -22,6 +22,9 @@ export default function BlogPostPage() {
   return (
     <main className="min-h-screen bg-gray-50 p-4 pb-20">
       {post && (
+        <link rel="canonical" href={`https://property-india-hub.vercel.app/blog/${post.slug}`} />
+      )}
+      {post && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

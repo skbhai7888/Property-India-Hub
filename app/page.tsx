@@ -152,6 +152,12 @@ export default async function Home() {
 
       <footer className="text-center py-4 text-xs" style={{background: '#060e1a', color: '#c9a84c'}}>
         <div className="flex gap-4 justify-center text-xs mb-2" style={{color: "#e8d5a3"}}>
+          <a href="/locations" className="hover:underline">Locations</a>
+          <a href="/blog" className="hover:underline">Blog</a>
+          <a href="/knowledge" className="hover:underline">Knowledge Base</a>
+          <a href="/about" className="hover:underline">About Us</a>
+        </div>
+        <div className="flex gap-4 justify-center text-xs mb-2" style={{color: "#e8d5a3"}}>
           <a href="/privacy" className="hover:underline">Privacy Policy</a>
           <a href="/terms" className="hover:underline">Terms &amp; Conditions</a>
           <a href="/disclaimer" className="hover:underline">Disclaimer</a>

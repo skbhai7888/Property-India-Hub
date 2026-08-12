@@ -157,6 +157,33 @@ export const blogPosts: BlogPost[] = [
     datePublished: "2026-08-12"
   },
 
+  {
+    slug: "circle-rate-vs-market-rate-property",
+    title: "Circle Rate vs Market Rate: What Property Buyers Should Know",
+    question: "What is the difference between circle rate and market rate in property?",
+    directAnswer: "Circle rate (also called guidance value or ready reckoner rate) is the minimum price set by the state government below which a property cannot be officially registered, while market rate is the actual price at which a property is bought and sold, which can be higher or occasionally close to the circle rate depending on demand.",
+    body: [
+      {
+        heading: "What Is Circle Rate",
+        content: "Circle rate is fixed by the state or local development authority for different areas and property types, and is used as the minimum benchmark for calculating stamp duty and registration charges. It is revised periodically by the authorities based on the region."
+      },
+      {
+        heading: "What Is Market Rate",
+        content: "Market rate is the price actually negotiated between buyer and seller, influenced by factors like location, amenities, demand, and property condition. In most active markets, the market rate is at or above the circle rate, though this can vary by locality."
+      },
+      {
+        heading: "Why This Matters for Buyers",
+        content: "Stamp duty and registration charges are calculated on whichever is higher between the circle rate and the actual transaction value, so buyers should check the applicable circle rate for their specific area before budgeting for registration costs. This information is typically available on the respective state's stamp and registration department website."
+      }
+    ],
+    faqs: [
+      { q: "Can I register a property below the circle rate?", a: "Generally no, registration is based on whichever is higher between the circle rate and the transaction value, so the stamp duty is calculated on at least the circle rate amount." },
+      { q: "How often are circle rates revised?", a: "This varies by state and locality, and is decided by the respective state or development authority, so it's best to check the current rate directly with the local registration department." },
+      { q: "Where can I check the circle rate for my area?", a: "Most states publish circle rates on their stamp and registration department's official website, searchable by locality or area." }
+    ],
+    datePublished: "2026-08-12"
+  },
+
 ];
 
 export function getBlogBySlug(slug: string) {

@@ -103,6 +103,33 @@ export const blogPosts: BlogPost[] = [
     datePublished: "2026-08-12"
   },
 
+  {
+    slug: "ready-to-move-vs-under-construction-property",
+    title: "Ready-to-Move vs Under-Construction Property: Which Should You Buy?",
+    question: "Should I buy a ready-to-move property or an under-construction one?",
+    directAnswer: "Ready-to-move properties let you move in immediately and avoid construction-delay risk, but usually cost more per square foot. Under-construction properties are often priced lower with flexible payment plans, but carry delivery-timeline risk, so the right choice depends on your urgency, budget, and risk tolerance.",
+    body: [
+      {
+        heading: "Ready-to-Move: Pros and Trade-offs",
+        content: "With a ready-to-move property, you can inspect the actual unit, move in right away, and there is no possession-delay risk. GST is generally not applicable on completed properties with an occupancy certificate. The trade-off is usually a higher price per square foot compared to a similar under-construction unit in the same area."
+      },
+      {
+        heading: "Under-Construction: Pros and Trade-offs",
+        content: "Under-construction properties are typically priced lower at launch and offer payment flexibility, such as Construction Linked Plans, which ease the upfront financial burden. The main risks are possible construction delays and the fact that you are buying based on plans and promises rather than a finished product, which is why verifying the builder's RERA track record matters."
+      },
+      {
+        heading: "How to Decide",
+        content: "If you need a home urgently, ready-to-move removes timeline uncertainty. If you have a longer investment horizon and want to potentially benefit from price appreciation during construction, an under-construction property from a RERA-registered, reputable builder can work well. Either way, verifying legal title, RERA registration, and approved layout plans is essential."
+      }
+    ],
+    faqs: [
+      { q: "Is GST applicable on ready-to-move properties?", a: "GST is generally not applicable on completed properties that have received an occupancy certificate, but it typically applies to under-construction properties." },
+      { q: "How can I check if a builder has a good delivery track record?", a: "You can check the builder's past project completion history and RERA registration status, which shows registered project timelines, on the respective state's RERA portal." },
+      { q: "Are under-construction properties riskier?", a: "They carry more construction-timeline risk than ready-to-move properties, but buying from a RERA-registered project with a reputable builder helps reduce this risk." }
+    ],
+    datePublished: "2026-08-12"
+  },
+
 ];
 
 export function getBlogBySlug(slug: string) {

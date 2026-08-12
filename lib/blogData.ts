@@ -184,6 +184,33 @@ export const blogPosts: BlogPost[] = [
     datePublished: "2026-08-12"
   },
 
+  {
+    slug: "nri-guide-buying-property-india",
+    title: "NRI Guide to Buying Property in India",
+    question: "Can an NRI buy property in India, and what should they know before doing so?",
+    directAnswer: "Yes, NRIs can legally purchase most residential and commercial property in India, typically through banking channels like NRE or NRO accounts, though direct purchase of agricultural land, farmhouses, and plantation property is generally restricted under current regulations.",
+    body: [
+      {
+        heading: "What NRIs Can and Cannot Buy",
+        content: "NRIs are generally permitted to buy residential and commercial properties in India. However, agricultural land, farmhouses, and plantation properties usually cannot be purchased directly by NRIs, though they can inherit such property."
+      },
+      {
+        heading: "Payment and Banking Channels",
+        content: "Property purchases by NRIs are typically routed through NRE (Non-Resident External) or NRO (Non-Resident Ordinary) bank accounts, or other channels permitted under RBI regulations. Payments in foreign currency notes or through normal banking channels outside these routes are usually not allowed for property transactions."
+      },
+      {
+        heading: "Documentation and Power of Attorney",
+        content: "Since NRIs may not always be physically present in India, a registered Power of Attorney (POA) is commonly used to authorize a trusted representative to complete site visits, documentation, and registration formalities on their behalf. It's important that the POA is properly drafted, notarized, and where required, registered."
+      }
+    ],
+    faqs: [
+      { q: "Do NRIs need RBI permission to buy residential property?", a: "General permission already exists for NRIs to buy residential and commercial property, so separate RBI approval is typically not required for these categories." },
+      { q: "Can NRIs get a home loan in India?", a: "Yes, most Indian banks offer home loans to NRIs, usually with income and documentation requirements specific to their country of residence." },
+      { q: "How can an NRI sell property in India later?", a: "NRIs can sell residential and commercial property in India, subject to applicable tax rules on capital gains and repatriation guidelines set by the RBI." }
+    ],
+    datePublished: "2026-08-12"
+  },
+
 ];
 
 export function getBlogBySlug(slug: string) {

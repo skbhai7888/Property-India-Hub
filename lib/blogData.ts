@@ -72,6 +72,37 @@ export const blogPosts: BlogPost[] = [
     datePublished: "2026-07-24",
   },
   
+  {
+    slug: "home-loan-process-property-purchase-india",
+    title: "Home Loan Process for Buying Property in India: A Simple Guide",
+    question: "What is the step-by-step process to get a home loan for buying property in India?",
+    directAnswer: "The home loan process typically involves checking eligibility, submitting an application with income and property documents, a technical and legal verification of the property by the bank, loan sanction, and final disbursement, which may be linked to construction stages for under-construction projects.",
+    body: [
+      {
+        heading: "Step 1: Check Eligibility and Compare Lenders",
+        content: "Banks and housing finance companies evaluate eligibility based on income, age, credit score, and existing liabilities. It helps to compare interest rates, processing fees, and loan tenure across a few lenders before applying, since these terms vary."
+      },
+      {
+        heading: "Step 2: Submit Application and Documents",
+        content: "Common documents include identity and address proof, income proof (salary slips or ITRs), bank statements, and property-related papers such as the sale agreement and title documents. Self-employed applicants are usually asked for additional business proof and financial statements."
+      },
+      {
+        heading: "Step 3: Property Verification by the Bank",
+        content: "The lender conducts a technical valuation of the property and a legal check of the title and approvals. This is why buying a property with clear title, RERA registration, and sanctioned building plans makes loan approval smoother."
+      },
+      {
+        heading: "Step 4: Sanction and Disbursement",
+        content: "Once approved, the bank issues a sanction letter with the approved amount, interest rate, and tenure. For ready-to-move properties, the loan is usually disbursed in full. For under-construction projects, disbursement often happens in stages linked to construction progress, common structures include the Construction Linked Plan (CLP)."
+      }
+    ],
+    faqs: [
+      { q: "Can I get a home loan for a resale property?", a: "Yes, most banks finance resale properties, subject to clear title verification and the property meeting the lender's technical and legal requirements." },
+      { q: "Does RERA registration affect loan approval?", a: "Yes, RERA-registered projects are generally easier to get financed since they add a layer of regulatory verification that banks look for." },
+      { q: "Is a down payment required?", a: "Yes, lenders typically finance a portion of the property value, and the remaining amount is expected as a down payment from the buyer." }
+    ],
+    datePublished: "2026-08-12"
+  },
+
 ];
 
 export function getBlogBySlug(slug: string) {

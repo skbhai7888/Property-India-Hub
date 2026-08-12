@@ -130,6 +130,33 @@ export const blogPosts: BlogPost[] = [
     datePublished: "2026-08-12"
   },
 
+  {
+    slug: "freehold-vs-leasehold-property-difference",
+    title: "Freehold vs Leasehold Property: What's the Difference?",
+    question: "What is the difference between freehold and leasehold property?",
+    directAnswer: "Freehold property gives the owner permanent, absolute ownership of the land and building, while leasehold property means the buyer owns the structure but the land is leased from an authority or owner for a fixed period, often 90 or 99 years, after which the lease may need renewal.",
+    body: [
+      {
+        heading: "Freehold Property",
+        content: "In a freehold property, the owner holds full and permanent rights over the land and any construction on it, with no time limit. Freehold properties are generally simpler to sell, transfer, or mortgage since there is no lease authority involved in approvals."
+      },
+      {
+        heading: "Leasehold Property",
+        content: "In many planned cities and authority-developed areas, land is allotted on a lease basis, commonly for 90 or 99 years, by a development authority. The buyer owns the built-up property but the underlying land technically belongs to the leasing authority. Selling or transferring a leasehold property may require the authority's permission and applicable transfer charges."
+      },
+      {
+        heading: "What This Means for Buyers",
+        content: "Many residential and commercial properties in NCR areas developed by authorities are on a leasehold basis, so it is common in the region and not necessarily a red flag. Buyers should check the remaining lease period, transfer fee requirements, and conversion rules (some authorities allow conversion to freehold for an additional charge) before purchasing."
+      }
+    ],
+    faqs: [
+      { q: "Can leasehold property be converted to freehold?", a: "In some cases yes, subject to the rules of the specific development authority and payment of a conversion charge, but this varies by location and authority policy." },
+      { q: "Is it harder to get a loan on leasehold property?", a: "Most banks do finance leasehold properties, especially with a long remaining lease term, but it is worth confirming with your specific lender." },
+      { q: "Does leasehold property lose value near the end of the lease?", a: "Properties with a shorter remaining lease term can be viewed as less attractive by some buyers and lenders, which is why checking the remaining lease years is an important step before buying." }
+    ],
+    datePublished: "2026-08-12"
+  },
+
 ];
 
 export function getBlogBySlug(slug: string) {

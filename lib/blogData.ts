@@ -211,6 +211,33 @@ export const blogPosts: BlogPost[] = [
     datePublished: "2026-08-12"
   },
 
+  {
+    slug: "gpa-property-sales-risk-india",
+    title: "GPA (Power of Attorney) Property Sales: Why They Carry Risk",
+    question: "Is it safe to buy property through a General Power of Attorney (GPA) sale?",
+    directAnswer: "Buying property purely through a General Power of Attorney (GPA) without a registered sale deed is legally risky, since the Supreme Court has clarified that GPA-based transactions do not by themselves transfer ownership title, meaning the buyer may not get full legal ownership.",
+    body: [
+      {
+        heading: "What Is a GPA Sale",
+        content: "In some regions, especially for older or agricultural-turned-residential land, sellers historically transferred property using a General Power of Attorney combined with a will or agreement to sell, instead of a registered sale deed. This was often done to save on stamp duty and registration costs."
+      },
+      {
+        heading: "Why This Is Risky",
+        content: "A landmark Supreme Court ruling clarified that GPA, agreement to sell, and will documents do not constitute valid ownership transfer on their own. Only a registered sale deed properly conveys title. Property bought only through GPA can face disputes, difficulty in reselling, and challenges in getting bank loans."
+      },
+      {
+        heading: "What Buyers Should Insist On",
+        content: "Always insist on a registered sale deed in your name, executed at the sub-registrar office with applicable stamp duty paid. If a property's chain of title includes an old GPA transaction, it is worth getting it verified by a property lawyer before proceeding, since it may need regularization."
+      }
+    ],
+    faqs: [
+      { q: "Can I get a home loan on a GPA-based property?", a: "Most banks are cautious about financing properties without a registered sale deed in the buyer's name, since GPA alone does not establish clear legal ownership." },
+      { q: "Is a GPA sale completely illegal?", a: "A GPA itself is a legal document for authorizing someone to act on your behalf, but using it as a substitute for a registered sale deed to transfer property ownership is not considered valid transfer of title." },
+      { q: "What should I do if a property I'm interested in has a GPA in its history?", a: "It's best to consult a property lawyer to check whether the title has since been regularized through a registered sale deed, before proceeding with the purchase." }
+    ],
+    datePublished: "2026-08-12"
+  },
+
 ];
 
 export function getBlogBySlug(slug: string) {

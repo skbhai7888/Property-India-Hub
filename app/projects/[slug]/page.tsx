@@ -402,30 +402,90 @@ export default function ProjectPage() {
     <div className="max-w-2xl mx-auto px-4 mb-6">
       <div className="bg-white rounded-xl shadow p-4">
         <h2 className="font-bold text-lg mb-3" style={{color: "#0a1628"}}>Frequently Asked Questions</h2>
-        <div className="space-y-3">
-          <div>
-            <p className="text-sm font-bold">Is this project RERA registered?</p>
-            <p className="text-sm text-gray-600">Buyers should independently verify RERA registration status directly with the builder or on the state RERA website before making any payment.</p>
-          </div>
-          <div>
-            <p className="text-sm font-bold">How do I schedule a site visit for this property?</p>
-            <p className="text-sm text-gray-600">Use the "Free Site Visit Book Karo" option on this page, or contact us directly via Call or WhatsApp to arrange a convenient time.</p>
-          </div>
-          <div>
-            <p className="text-sm font-bold">Can I negotiate the listed price?</p>
-            <p className="text-sm text-gray-600">Pricing is set by the property poster (owner, builder, or broker). You can discuss pricing directly with them via the Call or WhatsApp contact shown on this page.</p>
-          </div>
-          <div>
-            <p className="text-sm font-bold">What documents should I check before booking?</p>
-            <p className="text-sm text-gray-600">Typically buyers should review the title deed, RERA registration (if applicable), approved building plans, and any encumbrance certificates. We recommend consulting a legal professional before finalizing any purchase.</p>
-          </div>
-          <div>
-            <p className="text-sm font-bold">Does Property India Hub charge for site visits or inquiries?</p>
-            <p className="text-sm text-gray-600">No, browsing listings, booking a site visit, and contacting posters through Property India Hub is free for buyers and tenants.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    </main>
+<div className="space-y-3">
+  <div>
+    <p className="text-sm font-bold">1. Is this project RERA registered?</p>
+    <p className="text-sm text-gray-600">Verify RERA registration status directly with the builder or state RERA website.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">2. Schedule a site visit?</p>
+    <p className="text-sm text-gray-600">Use the Free Site Visit Book Kare option or contact via Call/WhatsApp.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">3. Can I negotiate price?</p>
+    <p className="text-sm text-gray-600">Discuss pricing directly with the poster via Call or WhatsApp.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">4. Documents to check?</p>
+    <p className="text-sm text-gray-600">Review title deed, RERA, approved plans, and encumbrance certificate.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">5. Platform charges?</p>
+    <p className="text-sm text-gray-600">Browsing and contacting through Property India Hub is completely free.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">6. Apply for home loan?</p>
+    <p className="text-sm text-gray-600">Most approved projects are eligible for loans from leading banks.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">7. Stamp duty process?</p>
+    <p className="text-sm text-gray-600">Registration is done at the sub-registrar office after paying stamp duty.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">8. Carpet vs Built-up area?</p>
+    <p className="text-sm text-gray-600">Carpet is usable area. Built-up includes walls and balcony.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">9. Maintenance charges?</p>
+    <p className="text-sm text-gray-600">Yes, monthly/annual charges apply for security, lift, and sanitation.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">10. Verify legal title?</p>
+    <p className="text-sm text-gray-600">Request title deeds and allotment letters from the seller.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">11. NRI buyers?</p>
+    <p className="text-sm text-gray-600">Yes, NRIs can legally purchase property using standard NRE/NRO channels.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">12. Payment plans?</p>
+    <p className="text-sm text-gray-600">Common plans include CLP, Down Payment, and PLP.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">13. Parking space?</p>
+    <p className="text-sm text-gray-600">Parking allotment depends on the individual project offerings.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">14. Possession delayed?</p>
+    <p className="text-sm text-gray-600">RERA-registered developers are liable to pay interest for delays.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">15. Other city visits?</p>
+    <p className="text-sm text-gray-600">We can coordinate video calls or guided virtual walkthroughs.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">16. Basic amenities?</p>
+    <p className="text-sm text-gray-600">Typically include 24/7 security, power backup, water, and parking.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">17. Contact directly?</p>
+    <p className="text-sm text-gray-600">Click the Call or WhatsApp button to connect with the poster.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">18. Bank loans available?</p>
+    <p className="text-sm text-gray-600">Properties with clear titles qualify for national/private bank loans.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">19. Booking precautions?</p>
+    <p className="text-sm text-gray-600">Verify documents and avoid transferring to unverified personal accounts.</p>
+  </div>
+  <div>
+    <p className="text-sm font-bold">20. Listing transparency?</p>
+    <p className="text-sm text-gray-600">We provide direct contact, structured specs, and clear locations.</p>
+  </div>
+</div>
+</div>
+</div>
+</main>
   );
 }
